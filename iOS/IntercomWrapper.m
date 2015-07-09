@@ -77,14 +77,22 @@ RCT_EXPORT_METHOD(logEvent:(NSString*)eventName metaData:(NSDictionary*)metaData
 // Available as NativeModules.IntercomWrapper.displayMessageComposer
 RCT_EXPORT_METHOD(displayMessageComposer:(RCTResponseSenderBlock)callback) {
   NSLog(@"displayMessageComposer");
-  [Intercom presentMessageComposer];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [Intercom presentMessageComposer];
+  });
+  
   callback(@[[NSNull null]]);
 };
 
 // Available as NativeModules.IntercomWrapper.displayConversationsList
 RCT_EXPORT_METHOD(displayConversationsList:(RCTResponseSenderBlock)callback) {
   NSLog(@"displayConversationsList");
-  [Intercom presentConversationList];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [Intercom presentConversationList];
+  });
+  
   callback(@[[NSNull null]]);
 };
 
