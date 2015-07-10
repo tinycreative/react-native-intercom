@@ -18,3 +18,43 @@ Install
 
 Usage
 =====
+### Require the module
+```javascript
+var Intercom = require('react-native-intercom');
+```
+
+### Log an event
+```javascript
+Intercom.logEvent('viewed_screen', { extra: 'metadata' });
+```
+
+### Register a Logged In user
+```javascript
+Intercom.registerIdentifiedUser({ userId: 'bob' });
+```
+
+### Register a Logged In user and post extra metadata
+```javascript
+Intercom.registerIdentifiedUser({ userId: 'bob' })
+.then(() => {
+	console.log('registerIdentifiedUser done');
+
+	return Intercom.updateUser({
+		email: 'email',
+		name: 'name',
+	});
+})
+.catch((err) => {
+	console.log('registerIdentifiedUser ERROR', err);
+});
+```
+
+### Sign Out
+```javascript
+Intercom.reset()
+```
+
+### Show Message Composer
+```javascript
+Intercom.displayMessageComposer();
+```
