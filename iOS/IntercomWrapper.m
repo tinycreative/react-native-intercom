@@ -16,14 +16,14 @@ RCT_EXPORT_MODULE();
 // Available as NativeModules.IntercomWrapper.registerIdentifiedUser
 RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options callback:(RCTResponseSenderBlock)callback) {
   NSLog(@"registerIdentifiedUser with %@", options);
-  
+
   NSString* userId      = options[@"userId"];
   NSString* userEmail   = options[@"email"];
-  
+
   if ([userId isKindOfClass:[NSNumber class]]) {
     userId = [(NSNumber *)userId stringValue];
   }
-  
+
   if (userId.length > 0 && userEmail.length > 0) {
     [Intercom registerUserWithUserId:userId email:userEmail];
     callback(@[[NSNull null], @[userId]]);
@@ -64,35 +64,35 @@ RCT_EXPORT_METHOD(updateUser:(NSDictionary*)options callback:(RCTResponseSenderB
 // Available as NativeModules.IntercomWrapper.logEvent
 RCT_EXPORT_METHOD(logEvent:(NSString*)eventName metaData:(NSDictionary*)metaData callback:(RCTResponseSenderBlock)callback) {
   NSLog(@"logEvent with %@", eventName);
-  
+
   if (metaData.count > 0) {
     [Intercom logEventWithName:eventName metaData:metaData];
   } else {
     [Intercom logEventWithName:eventName];
   }
-  
+
   callback(@[[NSNull null]]);
 };
 
 // Available as NativeModules.IntercomWrapper.displayMessageComposer
 RCT_EXPORT_METHOD(displayMessageComposer:(RCTResponseSenderBlock)callback) {
   NSLog(@"displayMessageComposer");
-  
+
   dispatch_async(dispatch_get_main_queue(), ^{
     [Intercom presentMessageComposer];
   });
-  
+
   callback(@[[NSNull null]]);
 };
 
 // Available as NativeModules.IntercomWrapper.displayConversationsList
 RCT_EXPORT_METHOD(displayConversationsList:(RCTResponseSenderBlock)callback) {
   NSLog(@"displayConversationsList");
-  
+
   dispatch_async(dispatch_get_main_queue(), ^{
     [Intercom presentConversationList];
   });
-  
+
   callback(@[[NSNull null]]);
 };
 
@@ -131,35 +131,5 @@ RCT_EXPORT_METHOD(setupAPN:(NSString*)deviceToken callback:(RCTResponseSenderBlo
   [Intercom setDeviceToken:[deviceToken dataUsingEncoding:NSUTF8StringEncoding]];
   callback(@[[NSNull null]]);
 };
-
-// Available as NativeModules.IntercomWrapper.registerForPush
-RCT_EXPORT_METHOD(registerForPush:(RCTResponseSenderBlock)callback) {
-  NSLog(@"registerForPush");
-  
-  UIApplication *application = [UIApplication sharedApplication];
-  if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]){ // iOS 8 (User notifications)
-    [application registerUserNotificationSettings:
-     [UIUserNotificationSettings settingsForTypes:
-      (UIUserNotificationTypeBadge |
-       UIUserNotificationTypeSound |
-       UIUserNotificationTypeAlert)
-                                       categories:nil]];
-    [application registerForRemoteNotifications];
-  } else { // iOS 7 (Remote notifications)
-    [application registerForRemoteNotificationTypes:
-     (UIRemoteNotificationType)
-     (UIRemoteNotificationTypeBadge |
-      UIRemoteNotificationTypeSound |
-      UIRemoteNotificationTypeAlert)];
-  }
-  
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    [Intercom registerForRemoteNotifications];
-  #pragma GCC diagnostic pop
-
-  callback(@[[NSNull null]]);
-};
-
 
 @end
