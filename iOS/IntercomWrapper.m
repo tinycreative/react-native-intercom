@@ -155,7 +155,6 @@ RCT_EXPORT_METHOD(registerForPush:(RCTResponseSenderBlock)callback) {
   
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    [Intercom registerForRemoteNotifications];
   #pragma GCC diagnostic pop
 
   callback(@[[NSNull null]]);
