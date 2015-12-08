@@ -24,7 +24,7 @@ import io.intercom.android.sdk.preview.IntercomPreviewPosition;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
-    private static final String MODULE_NAME = "Intercom";
+    private static final String MODULE_NAME = "IntercomWrapper";
     public static final String TAG = "Intercom";
 
     public IntercomModule(ReactApplicationContext reactContext) {
@@ -37,25 +37,22 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void registerIdentifiedUser(ReadableMap options, Callback errorCallback, Callback successCallback) {
-        String userId = options.getString("userId");
-        String userEmail = options.getString("email");
-
-        if (userEmail != null && userEmail.length() > 0) {
+    public void registerIdentifiedUser(ReadableMap options, Callback callback) {
+        if (options.hasKey("email") && options.getString("email").length() > 0) {
             Intercom.client().registerIdentifiedUser(
-                new Registration().withEmail(userEmail)
+                    new Registration().withEmail(options.getString("email"))
             );
             Log.i(TAG, "registerIdentifiedUser with userEmail");
-            successCallback.invoke(userEmail);
-        } else if (userId != null && userId.length() > 0) {
+            callback.invoke(null, null);
+        } else if (options.hasKey("userId") && options.getString("userId").length() > 0) {
             Intercom.client().registerIdentifiedUser(
-                new Registration().withUserId(userId)
+                    new Registration().withUserId(options.getString("userId"))
             );
             Log.i(TAG, "registerIdentifiedUser with userId");
-            successCallback.invoke(userId);
+            callback.invoke(null, null);
         } else {
             Log.e(TAG, "registerIdentifiedUser called with invalid userId or email");
-            errorCallback.invoke("Invalid userId or email");
+            callback.invoke("Invalid userId or email");
         }
     }
 
@@ -74,21 +71,20 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void updateUser(ReadableMap options, Callback errorCallback, Callback successCallback) {
+    public void updateUser(ReadableMap options, Callback callback) {
         try {
             Map<String, Object> map = recursivelyDeconstructReadableMap(options);
             Intercom.client().updateUser(map);
             Log.i(TAG, "updateUser");
-            successCallback.invoke(null);
+            callback.invoke(null, null);
         } catch (Exception e) {
             Log.e(TAG, "updateUser - unable to deconstruct argument map");
-            errorCallback.invoke(e.toString());
+            callback.invoke(e.toString());
         }
     }
 
     @ReactMethod
-    public void logEvent(String eventName, @Nullable ReadableMap metaData, Callback errorCallback,
-                         Callback succesCallback) {
+    public void logEvent(String eventName, @Nullable ReadableMap metaData, Callback callback) {
         try {
             if (metaData == null) {
                 Intercom.client().logEvent(eventName);
@@ -98,10 +94,10 @@ public class IntercomModule extends ReactContextBaseJavaModule {
                 Intercom.client().logEvent(eventName, deconstructedMap);
             }
             Log.i(TAG, "logEvent");
-            succesCallback.invoke(null);
+            callback.invoke(null, null);
         } catch (Exception e) {
             Log.e(TAG, "logEvent - unable to deconstruct metaData");
-            errorCallback.invoke(e.toString());
+            callback.invoke(e.toString());
         }
     }
 
