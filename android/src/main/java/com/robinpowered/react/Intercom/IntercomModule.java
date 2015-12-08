@@ -20,6 +20,7 @@ import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.identity.Registration;
+import io.intercom.android.sdk.preview.IntercomPreviewPosition;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -83,6 +84,48 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             Log.e(TAG, "updateUser - unable to deconstruct argument map");
             errorCallback.invoke(e.toString());
         }
+    }
+
+    @ReactMethod
+    public void logEvent(String eventName, @Nullable ReadableMap metaData, Callback errorCallback,
+                         Callback succesCallback) {
+        try {
+            if (metaData == null) {
+                Intercom.client().logEvent(eventName);
+            }
+            if (metaData != null) {
+                Map<String, Object> deconstructedMap = recursivelyDeconstructReadableMap(metaData);
+                Intercom.client().logEvent(eventName, deconstructedMap);
+            }
+            Log.i(TAG, "logEvent");
+            succesCallback.invoke(null);
+        } catch (Exception e) {
+            Log.e(TAG, "logEvent - unable to deconstruct metaData");
+            errorCallback.invoke(e.toString());
+        }
+    }
+
+    @ReactMethod
+    public void displayMessageComposer(Callback callback) {
+        Intercom.client().displayMessageComposer();
+        callback.invoke(null);
+    }
+
+    @ReactMethod
+    public void displayConversationList(Callback callback) {
+        Intercom.client().displayConversationsList();
+        callback.invoke(null);
+    }
+
+    @ReactMethod
+    public void setVisibility(Integer visibility, Callback callback) {
+        Intercom.client().setVisibility(visibility);
+        callback.invoke(null);
+    }
+
+    @ReactMethod
+    public void setPreviewPosition() {
+        // @TODO
     }
 
     private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
