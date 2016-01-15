@@ -60,14 +60,16 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     public void registerUnidentifiedUser(Callback callback) {
         Intercom.client().registerUnidentifiedUser();
         Log.i(TAG, "registerUnidentifiedUser");
-        callback.invoke(null);
+        callback.invoke(null, null);
     }
 
     @ReactMethod
-    public void reset(Callback callback) {
+    public void reset(@Nullable Callback callback) {
         Intercom.client().reset();
         Log.i(TAG, "reset");
-        callback.invoke(null);
+        if (callback != null) {
+            callback.invoke(null, null);
+        }
     }
 
     @ReactMethod
@@ -104,19 +106,19 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void displayMessageComposer(Callback callback) {
         Intercom.client().displayMessageComposer();
-        callback.invoke(null);
+        callback.invoke(null, null);
     }
 
     @ReactMethod
     public void displayConversationList(Callback callback) {
         Intercom.client().displayConversationsList();
-        callback.invoke(null);
+        callback.invoke(null, null);
     }
 
     @ReactMethod
     public void setVisibility(Integer visibility, Callback callback) {
         Intercom.client().setVisibility(visibility);
-        callback.invoke(null);
+        callback.invoke(null, null);
     }
 
     @ReactMethod
