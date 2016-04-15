@@ -1,6 +1,6 @@
 {
   "name": "react-native-intercom",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "A React Native client for Intercom.io",
   "main": "./lib/IntercomClient.js",
   "scripts": {
@@ -8,12 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/asamiller/react-native-intercom.git"
+    "url": "git+https://github.com/asamiller/react-native-intercom.git"
   },
   "author": "Asa Miller",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/asamiller/react-native-intercom/issues"
   },
-  "homepage": "https://github.com/asamiller/react-native-intercom"
+  "homepage": "https://github.com/asamiller/react-native-intercom",
+  "devDependencies": {
+    "react-native": "^0.23.1"
+  },
+  "dependencies": {}
 }

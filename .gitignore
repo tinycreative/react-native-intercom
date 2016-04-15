@@ -8,3 +8,4 @@ local.properties
 *.iml
 *.iws
 *.ipr
+node_modules
