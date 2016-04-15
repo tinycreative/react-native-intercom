@@ -4,8 +4,8 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 ## Install
 
 
-IOS
-====
+### IOS
+
 
 RNPM
 =======
@@ -21,16 +21,9 @@ Manual
 4. Add `pod 'Intercom'` to your Podfile and run `pod install`.
 
 
-Android
-=========
-
-RNPM
-=====
+### Android
 
 Run `rnpm link`
-
-Manual
-=========
 
 
 
