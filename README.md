@@ -6,14 +6,11 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
 ### IOS
 
-
-RNPM
-=======
+#### RNPM
 
 Run `rnpm link`
 
-Manual
-=========
+#### Manual
 
 1. `npm install react-native-intercom`
 2. In XCode, in the project navigator right click `Libraries` ➜ `Add Files to [your project's name]`
@@ -29,8 +26,8 @@ Run `rnpm link`
 
 ## Necessary Code Bits
 
-IOS
-====
+### IOS
+
 More instructions here: [Intercom for iOS](https://github.com/intercom/intercom-ios)
  
 Initialize Intercom in your `AppDelegate.m`
@@ -47,8 +44,8 @@ Initialize Intercom in your `AppDelegate.m`
 }
 ```
 
-Android
-=======
+### Android
+
 More instructions here: [Intercom for Android](https://github.com/intercom/intercom-android)
 
 ```
