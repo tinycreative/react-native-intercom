@@ -1,14 +1,46 @@
 # react-native-intercom
 React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://github.com/intercom/intercom-cordova)
 
-Install
+## Install
+
+
+IOS
+====
+
+RNPM
 =======
+
+Run `rnpm link`
+
+Manual
+=========
 
 1. `npm install react-native-intercom`
 2. In XCode, in the project navigator right click `Libraries` ➜ `Add Files to [your project's name]`
 3. Go to `node_modules` ➜ `react-native-intercom`➜ iOS and add `IntercomWrapper.h` and `IntercomWrapper.m` 
-4. Add `pod 'Intercom'` to your Podfile and run `pod install`. More instructions here: [Intercom for iOS](https://github.com/intercom/intercom-ios)
-5. Initialize Intercom in your `AppDelegate.m`
+4. Add `pod 'Intercom'` to your Podfile and run `pod install`.
+
+
+Android
+=========
+
+RNPM
+=====
+
+Run `rnpm link`
+
+Manual
+=========
+
+
+
+## Necessary Code Bits
+
+IOS
+====
+More instructions here: [Intercom for iOS](https://github.com/intercom/intercom-ios)
+ 
+Initialize Intercom in your `AppDelegate.m`
 ```
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Initialize Intercom
@@ -21,6 +53,15 @@ Install
      [Intercom setDeviceToken:deviceToken];
 }
 ```
+
+Android
+=======
+More instructions here: [Intercom for Android](https://github.com/intercom/intercom-android)
+
+```
+Intercom.initialize(getApplicationContext(), "your api key", "your app id");
+```
+
 
 Usage
 =====
