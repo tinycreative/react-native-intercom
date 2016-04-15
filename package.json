@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/asamiller/react-native-intercom",
   "devDependencies": {
-    "react-native": "^0.23.1"
+    "react-native": "*"
   },
   "dependencies": {}
 }
