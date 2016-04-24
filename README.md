@@ -33,6 +33,8 @@ More instructions here: [Intercom for iOS](https://github.com/intercom/intercom-
  
 Initialize Intercom in your `AppDelegate.m`
 ```
+#import "Intercom/intercom.h"
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Initialize Intercom
     [Intercom setApiKey:@"<#ios_sdk-...#>" forAppId:@"<#your-app-id#>"];
