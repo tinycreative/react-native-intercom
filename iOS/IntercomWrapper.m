@@ -156,5 +156,12 @@ RCT_EXPORT_METHOD(registerForPush:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null]]);
 };
 
+// Available as NativeModules.IntercomWrapper.setHMAC
+RCT_EXPORT_METHOD(setHMAC:(NSString*)hmac data:(NSString*)data callback:(RCTResponseSenderBlock)callback) {
+    NSLog(@"setHMAC with %@", hmac);
+    [Intercom setHMAC:hmac data:data];
+    callback(@[[NSNull null]]);
+};
+
 
 @end
