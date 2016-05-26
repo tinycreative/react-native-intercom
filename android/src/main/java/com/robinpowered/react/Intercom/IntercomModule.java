@@ -110,20 +110,28 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void displayConversationList(Callback callback) {
+    public void displayConversationsList(Callback callback) {
         Intercom.client().displayConversationsList();
         callback.invoke(null, null);
     }
 
     @ReactMethod
-    public void setVisibility(Integer visibility, Callback callback) {
+    public void setVisibility(String visibilityString, Callback callback) {
+        int visibility = 0;
+        if (visibilityString.equalsIgnoreCase("GONE"))  visibility = 1;
         Intercom.client().setVisibility(visibility);
         callback.invoke(null, null);
     }
 
     @ReactMethod
-    public void setPreviewPosition() {
-        // @TODO
+    public void setPreviewPosition(String previewPosition, Callback callback) {
+        IntercomPreviewPosition intercomPreviewPosition = IntercomPreviewPosition.TOP_RIGHT;
+        if (previewPosition.equalsIgnoreCase("TOP_LEFT")) intercomPreviewPosition = IntercomPreviewPosition.TOP_LEFT;
+        else if (previewPosition.equalsIgnoreCase("BOTTOM_LEFT")) intercomPreviewPosition = IntercomPreviewPosition.BOTTOM_LEFT;
+        else if (previewPosition.equalsIgnoreCase("BOTTOM_RIGHT")) intercomPreviewPosition = IntercomPreviewPosition.BOTTOM_RIGHT;
+
+        Intercom.client().setPreviewPosition(intercomPreviewPosition);
+        callback.invoke(null, null);
     }
 
     private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
