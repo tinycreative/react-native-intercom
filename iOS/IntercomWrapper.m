@@ -32,7 +32,7 @@ RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options callback:(RCTRes
         callback(@[[NSNull null], @[userId]]);
     } else if (userEmail.length > 0) {
         [Intercom registerUserWithEmail:userEmail];
-        callback(@[[NSNull null], @[userId]]);
+        callback(@[[NSNull null], @[userEmail]]);
     } else {
         NSLog(@"[Intercom] ERROR - No user registered. You must supply an email, a userId or both");
         callback(@[RCTMakeError(@"Error", nil, nil)]);
