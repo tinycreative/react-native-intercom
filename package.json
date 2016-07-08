@@ -8,14 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asamiller/react-native-intercom.git"
+    "url": "git+https://github.com/tinycreative/react-native-intercom.git"
   },
   "author": "Asa Miller",
+  "contributors": [{
+    "name": "Jason Brown",
+    "email": "browniefed@gmail.com"
+  }],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/asamiller/react-native-intercom/issues"
+    "url": "https://github.com/tinycreative/react-native-intercom/issues"
   },
-  "homepage": "https://github.com/asamiller/react-native-intercom",
+  "homepage": "https://github.com/tinycreative/react-native-intercom",
   "devDependencies": {
     "react-native": "*"
   },
