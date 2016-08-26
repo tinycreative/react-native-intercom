@@ -49,7 +49,11 @@ RCT_EXPORT_METHOD(registerUnidentifiedUser:(RCTResponseSenderBlock)callback) {
 // Available as NativeModules.IntercomWrapper.reset
 RCT_EXPORT_METHOD(reset:(RCTResponseSenderBlock)callback) {
     NSLog(@"reset");
-    [Intercom reset];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Intercom reset];
+    });
+    
     callback(@[[NSNull null]]);
 };
 
