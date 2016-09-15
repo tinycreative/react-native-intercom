@@ -74,6 +74,17 @@ RCT_EXPORT_METHOD(logEvent:(NSString*)eventName metaData:(NSDictionary*)metaData
     callback(@[[NSNull null]]);
 };
 
+// Available as NativeModules.IntercomWrapper.displayMessenger
+RCT_EXPORT_METHOD(displayMessenger:(RCTResponseSenderBlock)callback) {
+    NSLog(@"displayMessenger");
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Intercom presentMessenger];
+    });
+    
+    callback(@[[NSNull null]]);
+}
+
 // Available as NativeModules.IntercomWrapper.displayMessageComposer
 RCT_EXPORT_METHOD(displayMessageComposer:(RCTResponseSenderBlock)callback) {
     NSLog(@"displayMessageComposer");
@@ -96,31 +107,23 @@ RCT_EXPORT_METHOD(displayConversationsList:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null]]);
 };
 
-// Available as NativeModules.IntercomWrapper.setVisibility
-RCT_EXPORT_METHOD(setVisibility:(NSString*)visibilityString callback:(RCTResponseSenderBlock)callback) {
-    NSLog(@"setVisibility with %@", visibilityString);
-    BOOL hidden = NO;
-    if ([visibilityString isEqualToString:@"GONE"]) {
-        hidden = YES;
-    }
-    [Intercom setMessagesHidden:hidden];
+// Available as NativeModules.IntercomWrapper.getUnreadConversationCount
+RCT_EXPORT_METHOD(getUnreadConversationCount:(RCTResponseSenderBlock)callback) {
+    NSLog(@"getUnreadConversationCount");
     
-    callback(@[[NSNull null]]);
-};
+    NSNumber *unread_conversations = [NSNumber numberWithUnsignedInteger:[Intercom unreadConversationCount]];
+    
+    callback(@[[NSNull null], unread_conversations]);
+}
 
-// Available as NativeModules.IntercomWrapper.setPreviewPosition
-RCT_EXPORT_METHOD(setPreviewPosition:(NSString*)positionString callback:(RCTResponseSenderBlock)callback) {
-    NSLog(@"setPreviewPosition with %@", positionString);
-    
-    ICMPreviewPosition previewPosition = ICMPreviewPositionBottomLeft;
-    if ([positionString isEqualToString:@"BOTTOM_RIGHT"]) {
-        previewPosition = ICMPreviewPositionBottomRight;
-    } else if ([positionString isEqualToString:@"TOP_RIGHT"]) {
-        previewPosition = ICMPreviewPositionBottomRight;
-    } else if ([positionString isEqualToString:@"TOP_LEFT"]) {
-        previewPosition = ICMPreviewPositionBottomLeft;
+// Available as NativeModules.IntercomWrapper.setLauncherVisible
+RCT_EXPORT_METHOD(setLauncherVisible:(NSString*)visibilityString callback:(RCTResponseSenderBlock)callback) {
+    NSLog(@"setVisibility with %@", visibilityString);
+    BOOL visible = YES;
+    if ([visibilityString isEqualToString:@"GONE"]) {
+        visible = NO;
     }
-    [Intercom setPreviewPosition:previewPosition];
+    [Intercom setLauncherVisible:visible];
     
     callback(@[[NSNull null]]);
 };

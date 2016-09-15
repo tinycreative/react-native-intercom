@@ -20,7 +20,6 @@ import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.identity.Registration;
-import io.intercom.android.sdk.preview.IntercomPreviewPosition;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -104,6 +103,12 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void displayMessenger(Callback callback) {
+        Intercom.client().displayMessenger();
+        callback.invoke(null, null);
+    }
+
+    @ReactMethod
     public void displayMessageComposer(Callback callback) {
         Intercom.client().displayMessageComposer();
         callback.invoke(null, null);
@@ -116,22 +121,35 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setVisibility(String visibilityString, Callback callback) {
-        int visibility = 0;
-        if (visibilityString.equalsIgnoreCase("GONE"))  visibility = 1;
-        Intercom.client().setVisibility(visibility);
-        callback.invoke(null, null);
+    public void getUnreadConversationCount(Callback callback) {
+
+        try {
+            int conversationCount = Intercom.client().getUnreadConversationCount();
+
+            callback.invoke(conversationCount, null);
+        } catch (Exception ex) {
+            Log.e(TAG, "logEvent - unable to get conversation count");
+            callback.invoke(null, ex.toString());
+        }
     }
 
     @ReactMethod
-    public void setPreviewPosition(String previewPosition, Callback callback) {
-        IntercomPreviewPosition intercomPreviewPosition = IntercomPreviewPosition.TOP_RIGHT;
-        if (previewPosition.equalsIgnoreCase("TOP_LEFT")) intercomPreviewPosition = IntercomPreviewPosition.TOP_LEFT;
-        else if (previewPosition.equalsIgnoreCase("BOTTOM_LEFT")) intercomPreviewPosition = IntercomPreviewPosition.BOTTOM_LEFT;
-        else if (previewPosition.equalsIgnoreCase("BOTTOM_RIGHT")) intercomPreviewPosition = IntercomPreviewPosition.BOTTOM_RIGHT;
+    public void setLauncherVisible(String visibility, Callback callback) {
+        Intercom.Visibility intercomVisibility = Intercom.Visibility.VISIBLE;
+        if (visibility.equalsIgnoreCase("VISIBLE")) {
+            intercomVisibility = Intercom.Visibility.VISIBLE;
+        }
+        if (visibility.equalsIgnoreCase("GONE")) {
+            intercomVisibility = Intercom.Visibility.GONE;
+        }
 
-        Intercom.client().setPreviewPosition(intercomPreviewPosition);
-        callback.invoke(null, null);
+        try {
+            Intercom.client().setLauncherVisibility(intercomVisibility);
+
+            callback.invoke(null);
+        } catch (Exception ex) {
+            callback.invoke(ex.toString());
+        }
     }
 
     private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
@@ -171,7 +189,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         List<Object> deconstructedList = new ArrayList<>(readableArray.size());
         for (int i = 0; i < readableArray.size(); i++) {
             ReadableType indexType = readableArray.getType(i);
-            switch(indexType) {
+            switch (indexType) {
                 case Null:
                     deconstructedList.add(i, null);
                     break;

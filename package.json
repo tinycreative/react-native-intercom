@@ -1,6 +1,6 @@
 {
   "name": "react-native-intercom",
-  "version": "1.1.1",
+  "version": "3.0.0",
   "description": "A React Native client for Intercom.io",
   "main": "./lib/IntercomClient.js",
   "scripts": {
@@ -12,6 +12,12 @@
   },
   "author": "Asa Miller",
   "contributors": [{
+    "name": "Asa Miller",
+    "email": "asa@tinycreative.com"
+  }, {
+    "name": "Franklyn Tackitt",
+    "email": "frank@comanage.com"
+  }, {
     "name": "Jason Brown",
     "email": "browniefed@gmail.com"
   }],

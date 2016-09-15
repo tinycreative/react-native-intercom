@@ -34,7 +34,5 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:0.15.+'
-    compile ('io.intercom.android:intercom-sdk-base:1.+@aar') {
-      transitive = true
-    }
+    compile ('io.intercom.android:intercom-sdk-base:3.+')
 }
