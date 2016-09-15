@@ -12,12 +12,15 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
 Run `rnpm link`
 
+#### CocoaPods
+
+Add the following to your podfile
+
+    Pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'
+
 #### Manual
 
-Follow how to manually link a library here [https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content
-](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content
-)
-
+Follow how to manually link a library here [https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)
 
 ### Android
 
