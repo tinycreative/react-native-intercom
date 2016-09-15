@@ -20,7 +20,6 @@ import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.identity.Registration;
-import io.intercom.android.sdk.preview.IntercomPreviewPosition;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -155,7 +154,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         try {
             Intercom.client().setLauncherVisibility(intercomVisibility);
 
-            callback.invoke(null);
+            callback.invoke(null, null);
         } catch (Exception ex) {
             callback.invoke(ex.toString());
         }
@@ -168,7 +167,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         try {
             Intercom.client().setInAppMessageVisibility(intercomVisibility);
 
-            callback.invoke(null);
+            callback.invoke(null, null);
         } catch (Exception ex) {
             callback.invoke(ex.toString());
         }
