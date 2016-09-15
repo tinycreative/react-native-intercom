@@ -20,6 +20,7 @@ import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.identity.Registration;
+import io.intercom.android.sdk.preview.IntercomPreviewPosition;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -109,6 +110,12 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void hideMessenger(Callback callback) {
+        Intercom.client().hideMessenger();
+        callback.invoke(null, null);
+    }
+
+    @ReactMethod
     public void displayMessageComposer(Callback callback) {
         Intercom.client().displayMessageComposer();
         callback.invoke(null, null);
@@ -133,18 +140,33 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         }
     }
 
+    private Intercom.Visibility visibilityStringToVisibility(String visibility) {
+      if (visibility.equalsIgnoreCase("VISIBLE")) {
+        return Intercom.Visibility.VISIBLE;
+      } else {
+        return Intercom.Visibility.GONE;
+      }
+    }
+
     @ReactMethod
-    public void setLauncherVisible(String visibility, Callback callback) {
-        Intercom.Visibility intercomVisibility = Intercom.Visibility.VISIBLE;
-        if (visibility.equalsIgnoreCase("VISIBLE")) {
-            intercomVisibility = Intercom.Visibility.VISIBLE;
-        }
-        if (visibility.equalsIgnoreCase("GONE")) {
-            intercomVisibility = Intercom.Visibility.GONE;
-        }
+    public void setLauncherVisibility(String visibility, Callback callback) {
+        Intercom.Visibility intercomVisibility = visibilityStringToVisibility(visibility);
 
         try {
             Intercom.client().setLauncherVisibility(intercomVisibility);
+
+            callback.invoke(null);
+        } catch (Exception ex) {
+            callback.invoke(ex.toString());
+        }
+    }
+
+    @ReactMethod
+    public void setInAppMessageVisibility(String visibility, Callback callback) {
+        Intercom.Visibility intercomVisibility = visibilityStringToVisibility(visibility);
+
+        try {
+            Intercom.client().setInAppMessageVisibility(intercomVisibility);
 
             callback.invoke(null);
         } catch (Exception ex) {
@@ -189,7 +211,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         List<Object> deconstructedList = new ArrayList<>(readableArray.size());
         for (int i = 0; i < readableArray.size(); i++) {
             ReadableType indexType = readableArray.getType(i);
-            switch (indexType) {
+            switch(indexType) {
                 case Null:
                     deconstructedList.add(i, null);
                     break;
