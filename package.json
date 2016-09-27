@@ -1,6 +1,6 @@
 {
   "name": "react-native-intercom",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A React Native client for Intercom.io",
   "main": "./lib/IntercomClient.js",
   "scripts": {
@@ -11,16 +11,20 @@
     "url": "git+https://github.com/tinycreative/react-native-intercom.git"
   },
   "author": "Asa Miller",
-  "contributors": [{
-    "name": "Asa Miller",
-    "email": "asa@tinycreative.com"
-  }, {
-    "name": "Franklyn Tackitt",
-    "email": "frank@comanage.com"
-  }, {
-    "name": "Jason Brown",
-    "email": "browniefed@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Asa Miller",
+      "email": "asa@tinycreative.com"
+    },
+    {
+      "name": "Franklyn Tackitt",
+      "email": "frank@comanage.com"
+    },
+    {
+      "name": "Jason Brown",
+      "email": "browniefed@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tinycreative/react-native-intercom/issues"
