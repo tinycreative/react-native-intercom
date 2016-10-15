@@ -16,7 +16,7 @@ Run `rnpm link`
 
 Add the following to your podfile
 
-    Pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'
+    pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'
 
 #### Manual
 
