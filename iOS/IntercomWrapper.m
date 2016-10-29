@@ -135,7 +135,7 @@ RCT_EXPORT_METHOD(getUnreadConversationCount:(RCTResponseSenderBlock)callback) {
 RCT_EXPORT_METHOD(setLauncherVisibility:(NSString*)visibilityString callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"setVisibility with %@", visibilityString);
     BOOL visible = NO;
-    if ([visibilityString isEqualToString:@"GONE"]) {
+    if ([visibilityString isEqualToString:@"VISIBLE"]) {
         visible = YES;
     }
     [Intercom setLauncherVisible:visible];
