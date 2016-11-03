@@ -192,5 +192,10 @@ RCT_EXPORT_METHOD(setHMAC:(NSString*)hmac data:(NSString*)data callback:(RCTResp
     callback(@[[NSNull null]]);
 };
 
+// Available as NativeModules.IntercomWrapper.setBottomPadding
+RCT_EXPORT_METHOD(setBottomPadding:(CGFloat)padding callback:(RCTResponseSenderBlock)callback) {
+    [Intercom setBottomPadding:padding];
+    callback(@[[NSNull null]]);
+};
 
 @end
