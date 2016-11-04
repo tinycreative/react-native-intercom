@@ -101,3 +101,24 @@ Intercom.reset()
 ```javascript
 Intercom.displayMessageComposer();
 ```
+
+### Set Bottom Padding
+```javascript
+Intercom.setBottomPadding(64);
+```
+
+### Listen for Unread Conversation Notifications
+```javascript
+componentDidMount() {
+	Intercom.addEventListener(Intercom.Notifications.UNREAD_COUNT, this._onUnreadChange)
+}
+
+componentWillUnmount() {
+	Intercom.removeEventListener(Intercom.Notifications.UNREAD_COUNT, this._onUnreadChange);
+}
+
+_onUnreadChange = ({ count }) => {
+	//...
+}
+
+```

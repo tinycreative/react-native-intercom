@@ -9,3 +9,5 @@ local.properties
 *.iws
 *.ipr
 node_modules
+
+*xcuserdata
