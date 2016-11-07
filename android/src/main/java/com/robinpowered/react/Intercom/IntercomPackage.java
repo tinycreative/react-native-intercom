@@ -20,6 +20,7 @@ public class IntercomPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new IntercomModule(reactContext));
+        modules.add(new IntercomEventEmitter(reactContext));
         return modules;
     }
 

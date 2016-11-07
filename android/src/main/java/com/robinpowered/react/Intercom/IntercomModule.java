@@ -132,10 +132,10 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         try {
             int conversationCount = Intercom.client().getUnreadConversationCount();
 
-            callback.invoke(conversationCount, null);
+            callback.invoke(null, conversationCount);
         } catch (Exception ex) {
             Log.e(TAG, "logEvent - unable to get conversation count");
-            callback.invoke(null, ex.toString());
+            callback.invoke(ex.toString());
         }
     }
 
