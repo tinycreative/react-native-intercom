@@ -12,6 +12,8 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import javax.annotation.Nullable;
 
+import android.util.Log;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -49,9 +51,13 @@ public class IntercomEventEmitter extends ReactContextBaseJavaModule {
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
         if(getReactApplicationContext().hasActiveCatalystInstance()) {
-            getReactApplicationContext()
+            try {
+                getReactApplicationContext()
                     .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(eventName, params);
+            } catch (Exception e) {
+                Log.e(TAG, "sendEvent called before bundle loaded");
+            }
         }
     }
 
