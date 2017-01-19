@@ -7,8 +7,8 @@
 //
 
 
-#import "RCTBridgeModule.h"
-#import "RCTUtils.h"
+#import <React/RCTBridgeModule.h>
+#import <React/RCTUtils.h>
 
 @interface IntercomWrapper : NSObject <RCTBridgeModule>
 @end
