@@ -103,6 +103,12 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void handlePushMessage(Callback callback) {
+        Intercom.client().handlePushMessage();
+        callback.invoke(null, null);
+    }
+
+    @ReactMethod
     public void displayMessenger(Callback callback) {
         Intercom.client().displayMessenger();
         callback.invoke(null, null);
