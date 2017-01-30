@@ -78,6 +78,15 @@ RCT_EXPORT_METHOD(logEvent:(NSString*)eventName metaData:(NSDictionary*)metaData
     callback(@[[NSNull null]]);
 };
 
+// Available as NativeModules.IntercomWrapper.handlePushMessage
+RCT_EXPORT_METHOD(handlePushMessage:(RCTResponseSenderBlock)callback) {
+    NSLog(@"handlePushMessage");
+
+    // This is a stub. The iOS Intercom client automatically handles push notifications
+
+    callback(@[[NSNull null]]);
+}
+
 // Available as NativeModules.IntercomWrapper.displayMessenger
 RCT_EXPORT_METHOD(displayMessenger:(RCTResponseSenderBlock)callback) {
     NSLog(@"displayMessenger");
