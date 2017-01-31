@@ -30,8 +30,5 @@
     "url": "https://github.com/tinycreative/react-native-intercom/issues"
   },
   "homepage": "https://github.com/tinycreative/react-native-intercom",
-  "devDependencies": {
-    "react-native": "*"
-  },
   "dependencies": {}
 }
