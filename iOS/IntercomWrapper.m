@@ -120,6 +120,17 @@ RCT_EXPORT_METHOD(displayMessageComposer:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null]]);
 };
 
+RCT_EXPORT_METHOD(displayMessageComposerWithInitialMessage:(NSString*)message callback:(RCTResponseSenderBlock)callback) {
+    NSLog(@"displayMessageComposerWithInitialMessage");
+    NSLog(message);
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Intercom presentMessageComposerWithInitialMessage:message];
+    });
+
+    callback(@[[NSNull null]]);
+};
+
 // Available as NativeModules.IntercomWrapper.displayConversationsList
 RCT_EXPORT_METHOD(displayConversationsList:(RCTResponseSenderBlock)callback) {
     NSLog(@"displayConversationsList");
