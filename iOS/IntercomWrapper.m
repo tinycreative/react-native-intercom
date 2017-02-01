@@ -122,7 +122,6 @@ RCT_EXPORT_METHOD(displayMessageComposer:(RCTResponseSenderBlock)callback) {
 
 RCT_EXPORT_METHOD(displayMessageComposerWithInitialMessage:(NSString*)message callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"displayMessageComposerWithInitialMessage");
-    NSLog(message);
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [Intercom presentMessageComposerWithInitialMessage:message];
