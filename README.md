@@ -104,7 +104,7 @@ Intercom.displayMessageComposer();
 
 ### Show Message Composer with an Initial Message
 ```javascript
-Intercom.displayMessageComposer('Initial Message');
+Intercom.displayMessageComposerWithInitialMessage('Initial Message');
 ```
 
 ### Set Bottom Padding
