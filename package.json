@@ -1,64 +1,16 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "react-native-intercom@git+https://github.com/trcm/react-native-intercom.git",
-        "scope": null,
-        "escapedName": "react-native-intercom",
-        "name": "react-native-intercom",
-        "rawSpec": "git+https://github.com/trcm/react-native-intercom.git",
-        "spec": "git+https://github.com/trcm/react-native-intercom.git",
-        "type": "hosted",
-        "hosted": {
-          "type": "github",
-          "ssh": "git@github.com:trcm/react-native-intercom.git",
-          "sshUrl": "git+ssh://git@github.com/trcm/react-native-intercom.git",
-          "httpsUrl": "git+https://github.com/trcm/react-native-intercom.git",
-          "gitUrl": "git://github.com/trcm/react-native-intercom.git",
-          "shortcut": "github:trcm/react-native-intercom",
-          "directUrl": "https://raw.githubusercontent.com/trcm/react-native-intercom/master/package.json"
-        }
-      },
-      "/Users/tom/Work/DocketApp"
-    ]
-  ],
-  "_from": "git+https://github.com/trcm/react-native-intercom.git",
-  "_id": "react-native-intercom@5.4.0",
-  "_inCache": true,
-  "_location": "/react-native-intercom",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "react-native-intercom@git+https://github.com/trcm/react-native-intercom.git",
-    "scope": null,
-    "escapedName": "react-native-intercom",
-    "name": "react-native-intercom",
-    "rawSpec": "git+https://github.com/trcm/react-native-intercom.git",
-    "spec": "git+https://github.com/trcm/react-native-intercom.git",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:trcm/react-native-intercom.git",
-      "sshUrl": "git+ssh://git@github.com/trcm/react-native-intercom.git",
-      "httpsUrl": "git+https://github.com/trcm/react-native-intercom.git",
-      "gitUrl": "git://github.com/trcm/react-native-intercom.git",
-      "shortcut": "github:trcm/react-native-intercom",
-      "directUrl": "https://raw.githubusercontent.com/trcm/react-native-intercom/master/package.json"
-    }
+  "name": "react-native-intercom",
+  "version": "5.4.0",
+  "description": "A React Native client for Intercom.io",
+  "main": "./lib/IntercomClient.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "git+https://github.com/trcm/react-native-intercom.git#f4edfa2db4617a33a6385bd361526e1a28864289",
-  "_shasum": "70f627e7877b318b15f24cd1cc47e9b8032c9a27",
-  "_shrinkwrap": null,
-  "_spec": "react-native-intercom@git+https://github.com/trcm/react-native-intercom.git",
-  "_where": "/Users/tom/Work/DocketApp",
-  "author": {
-    "name": "Asa Miller"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinycreative/react-native-intercom.git"
   },
-  "bugs": {
-    "url": "https://github.com/tinycreative/react-native-intercom/issues"
-  },
+  "author": "Asa Miller",
   "contributors": [
     {
       "name": "Asa Miller",
@@ -73,23 +25,10 @@
       "email": "browniefed@gmail.com"
     }
   ],
-  "dependencies": {},
-  "description": "A React Native client for Intercom.io",
-  "devDependencies": {},
-  "gitHead": "f4edfa2db4617a33a6385bd361526e1a28864289",
-  "homepage": "https://github.com/tinycreative/react-native-intercom",
   "license": "MIT",
-  "main": "./lib/IntercomClient.js",
-  "name": "react-native-intercom",
-  "optionalDependencies": {},
-  "readme": "# react-native-intercom\nReact Native wrapper for Intercom.io. Based off of [intercom-cordova](https://github.com/intercom/intercom-cordova)\n\n## Install\n\n\n### IOS\n\n1. `npm install react-native-intercom`\n\n#### RNPM\n\nRun `rnpm link`\n\n#### CocoaPods\n\nAdd the following to your podfile\n\n    pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'\n\n#### Manual\n\nFollow how to manually link a library here [https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#content)\n\n### Android\n\nRun `rnpm link`\n\n\n\n## Necessary Code Bits\n\n### IOS\n\nMore instructions here: [Intercom for iOS](https://github.com/intercom/intercom-ios)\n \nInitialize Intercom in your `AppDelegate.m`\n```\n#import \"Intercom/intercom.h\"\n\n- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {\n    // Initialize Intercom\n    [Intercom setApiKey:@\"<#ios_sdk-...#>\" forAppId:@\"<#your-app-id#>\"];\n}\n```\n6. [Intercom's documentation](https://github.com/intercom/intercom-ios/blob/1fe2e92c4913e4ffef290b5b62dac5ecef74ea1d/Intercom.framework/Versions/A/Headers/Intercom.h#L65) suggests adding the following call in order to receive push notifications for new messages:\n```\n- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {\n     [Intercom setDeviceToken:deviceToken];\n}\n```\n\n### Android\n\nMore instructions here: [Intercom for Android](https://github.com/intercom/intercom-android)\n\n```\nIntercom.initialize(getApplicationContext(), \"your api key\", \"your app id\");\n```\n\n\nUsage\n=====\n### Require the module\n```javascript\nvar Intercom = require('react-native-intercom');\n```\n\n### Log an event\n```javascript\nIntercom.logEvent('viewed_screen', { extra: 'metadata' });\n```\n\n### Register a Logged In user\n```javascript\nIntercom.registerIdentifiedUser({ userId: 'bob' });\n```\n\n### Register a Logged In user and post extra metadata\n```javascript\nIntercom.registerIdentifiedUser({ userId: 'bob' })\n.then(() => {\n\tconsole.log('registerIdentifiedUser done');\n\n\treturn Intercom.updateUser({\n\t\temail: 'email',\n\t\tname: 'name',\n\t});\n})\n.catch((err) => {\n\tconsole.log('registerIdentifiedUser ERROR', err);\n});\n```\n\n### Sign Out\n```javascript\nIntercom.reset()\n```\n\n### Show Message Composer\n```javascript\nIntercom.displayMessageComposer();\n```\n\n### Set Bottom Padding\n```javascript\nIntercom.setBottomPadding(64);\n```\n\n### Listen for Unread Conversation Notifications\n```javascript\ncomponentDidMount() {\n\tIntercom.addEventListener(Intercom.Notifications.UNREAD_COUNT, this._onUnreadChange)\n}\n\ncomponentWillUnmount() {\n\tIntercom.removeEventListener(Intercom.Notifications.UNREAD_COUNT, this._onUnreadChange);\n}\n\n_onUnreadChange = ({ count }) => {\n\t//...\n}\n\n```",
-  "readmeFilename": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tinycreative/react-native-intercom.git"
+  "bugs": {
+    "url": "https://github.com/tinycreative/react-native-intercom/issues"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "5.4.0"
+  "homepage": "https://github.com/tinycreative/react-native-intercom",
+  "dependencies": {}
 }
