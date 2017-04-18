@@ -11,8 +11,8 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 16
@@ -34,5 +34,5 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:0.15.+'
-    compile 'io.intercom.android:intercom-sdk-base:3.0.+'
+    compile 'io.intercom.android:intercom-sdk-gcm:3.1.+'
 }
