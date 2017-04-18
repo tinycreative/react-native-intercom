@@ -58,7 +58,7 @@ More instructions here: [Intercom for Android](https://github.com/intercom/inter
 Intercom.initialize(getApplicationContext(), "your api key", "your app id");
 ```
 
-And in your *AndroidManifest.xml* file add the following lines within the *<application> ... </application>* tags
+And in your *AndroidManifest.xml* file add the following lines within the {quote}<application> ... </application>{quote} tags
 ```xml
 <service
      android:name="com.robinpowered.react.Intercom.IntercomIntentService"
