@@ -58,6 +58,18 @@ More instructions here: [Intercom for Android](https://github.com/intercom/inter
 Intercom.initialize(getApplicationContext(), "your api key", "your app id");
 ```
 
+And in your *AndroidManifest.xml* file add the following lines within the `<application> ... </application>` tags
+```xml
+<service
+     android:name="com.robinpowered.react.Intercom.IntercomIntentService"
+     android:exported="false">
+     <intent-filter
+        android:priority="999">
+        <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+    </intent-filter>
+ </service>
+```
+
 
 Usage
 =====
