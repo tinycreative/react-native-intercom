@@ -67,9 +67,14 @@ And in your *AndroidManifest.xml* file add the following lines within the `<appl
         android:priority="999">
         <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
     </intent-filter>
- </service>
+</service>
+ 
+ <receiver
+     android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver"
+     tools:replace="android:exported"
+     android:exported="true" />
 ```
-
+Make sure to add *xmlns:tools="http://schemas.android.com/tools"* in your main `<application>` tag
 
 Usage
 =====
@@ -91,17 +96,10 @@ Intercom.registerIdentifiedUser({ userId: 'bob' });
 ### Register a Logged In user and post extra metadata
 ```javascript
 Intercom.registerIdentifiedUser({ userId: 'bob' })
-.then(() => {
-	console.log('registerIdentifiedUser done');
-
-	return Intercom.updateUser({
+Intercom.updateUser({
 		email: 'email',
 		name: 'name',
 	});
-})
-.catch((err) => {
-	console.log('registerIdentifiedUser ERROR', err);
-});
 ```
 
 ### Sign Out
