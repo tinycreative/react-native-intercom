@@ -14,11 +14,13 @@
 RCT_EXPORT_MODULE();
 
 - (void)handleUpdateUnreadCount:(NSNotification *)notification {
+    __weak IntercomEventEmitter *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        IntercomEventEmitter *strongSelf = weakSelf;
         NSUInteger unreadCount = [Intercom unreadConversationCount];
         NSNumber *unreadCountNumber = [NSNumber numberWithUnsignedInteger: unreadCount];
         NSDictionary *body = @{@"count": unreadCountNumber};
-        [self sendEventWithName:IntercomUnreadConversationCountDidChangeNotification body:body];
+        [strongSelf sendEventWithName:IntercomUnreadConversationCountDidChangeNotification body:body];
     });
 }
 
@@ -31,16 +33,11 @@ RCT_EXPORT_MODULE();
 }
 
 -(void)startObserving {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateUnreadCount:) name:IntercomUnreadConversationCountDidChangeNotification object:nil];
-    });
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdateUnreadCount:) name:IntercomUnreadConversationCountDidChangeNotification object:nil];
 }
 
 - (void)stopObserving {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    });
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
-
