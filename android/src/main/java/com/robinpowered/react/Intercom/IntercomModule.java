@@ -133,6 +133,12 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setUserHash(String userHash, Callback callback) {
+        Intercom.client().setUserHash(userHash);
+        callback.invoke(null, null);
+    }
+
+    @ReactMethod
     public void setHMAC(String hmac, String data, Callback callback) {
         Intercom.client().setSecureMode(hmac, data);
         callback.invoke(null, null);
