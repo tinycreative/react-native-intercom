@@ -61,7 +61,11 @@ RCT_EXPORT_METHOD(reset:(RCTResponseSenderBlock)callback) {
 RCT_EXPORT_METHOD(updateUser:(NSDictionary*)options callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"updateUser with %@", options);
     NSDictionary* attributes = options;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    // TODO: use updateUser:
     [Intercom updateUserWithAttributes:attributes];
+#pragma clang diagnostic pop
     callback(@[[NSNull null]]);
 };
 
@@ -186,28 +190,14 @@ RCT_EXPORT_METHOD(registerForPush:(RCTResponseSenderBlock)callback) {
     NSLog(@"registerForPush");
 
     UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]){ // iOS 8 (User notifications)
-        [application registerUserNotificationSettings:
-         [UIUserNotificationSettings settingsForTypes:
-          (UIUserNotificationTypeBadge |
-           UIUserNotificationTypeSound |
-           UIUserNotificationTypeAlert)
-                                           categories:nil]];
-        [application registerForRemoteNotifications];
-    } else { // iOS 7 (Remote notifications)
-        [application registerForRemoteNotificationTypes:
-         (UIRemoteNotificationType)
-         (UIRemoteNotificationTypeBadge |
-          UIRemoteNotificationTypeSound |
-          UIRemoteNotificationTypeAlert)];
-    }
+    [application registerUserNotificationSettings:
+     [UIUserNotificationSettings settingsForTypes:
+      (UIUserNotificationTypeBadge |
+       UIUserNotificationTypeSound |
+       UIUserNotificationTypeAlert)
+                                       categories:nil]];
+    [application registerForRemoteNotifications];
 
-    callback(@[[NSNull null]]);
-};
-
-// Available as NativeModules.IntercomWrapper.setHMAC
-RCT_EXPORT_METHOD(setHMAC:(NSString*)hmac data:(NSString*)data callback:(RCTResponseSenderBlock)callback) {
-    [Intercom setHMAC:hmac data:data];
     callback(@[[NSNull null]]);
 };
 
