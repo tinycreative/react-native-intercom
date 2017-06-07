@@ -6,11 +6,8 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
 ### IOS
 
-1. `npm install react-native-intercom`
-
-#### RNPM
-
-Run `rnpm link`
+Run `npm install react-native-intercom`
+Run `react-native link`
 
 #### CocoaPods
 
@@ -24,8 +21,7 @@ Follow how to manually link a library here [https://facebook.github.io/react-nat
 
 ### Android
 
-Run `rnpm link`
-
+Run `npm install react-native-intercom`
 
 
 ## Necessary Code Bits
