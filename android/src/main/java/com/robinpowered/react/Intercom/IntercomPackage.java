@@ -23,6 +23,10 @@ public class IntercomPackage implements ReactPackage {
         modules.add(new IntercomEventEmitter(reactContext));
         return modules;
     }
+    
+    public List<Class<? extends JavaScriptModule>> createJSModules() {		
+        return Collections.emptyList();		
+    }
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
