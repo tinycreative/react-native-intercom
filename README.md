@@ -132,4 +132,15 @@ _onUnreadChange = ({ count }) => {
 	//...
 }
 
+
+```
+
+### Send FCM token directly to Intercom
+
+```
+Firebase.messaging().getToken()
+  .then((token) => {
+    console.log('Device FCM Token: ', token);
+    Intercom.sendTokenToIntercom(token);
+});
 ```
