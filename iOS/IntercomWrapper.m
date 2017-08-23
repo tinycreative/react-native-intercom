@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options callback:(RCTRes
     }
 };
 
-// Available as NativeModules.IntercomWrapper.handlePushMessage
+// Available as NativeModules.IntercomWrapper.sendTokenToIntercom
 RCT_EXPORT_METHOD(sendTokenToIntercom:(NSString*)token callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"sendTokenToIntercom");
 
