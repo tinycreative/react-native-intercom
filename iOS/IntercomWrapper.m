@@ -39,6 +39,18 @@ RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options callback:(RCTRes
     }
 };
 
+// Available as NativeModules.IntercomWrapper.sendTokenToIntercom
+RCT_EXPORT_METHOD(sendTokenToIntercom:(NSString*)token callback:(RCTResponseSenderBlock)callback) {
+    NSLog(@"sendTokenToIntercom");
+
+    // This is a stub. The iOS Intercom client sends the deviceToken instead of FCM token in:
+    // - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    //    [Intercom setDeviceToken:deviceToken];
+    // }
+
+    callback(@[[NSNull null]]);
+}
+
 // Available as NativeModules.IntercomWrapper.registerUnidentifiedUser
 RCT_EXPORT_METHOD(registerUnidentifiedUser:(RCTResponseSenderBlock)callback) {
     NSLog(@"registerUnidentifiedUser");
