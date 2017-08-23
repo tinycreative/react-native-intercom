@@ -20,11 +20,14 @@ import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.identity.Registration;
+import io.intercom.android.sdk.push.IntercomPushClient;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
     private static final String MODULE_NAME = "IntercomWrapper";
     public static final String TAG = "Intercom";
+
+    private final IntercomPushClient intercomPushClient = new IntercomPushClient();
 
     public IntercomModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -53,6 +56,13 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             Log.e(TAG, "registerIdentifiedUser called with invalid userId or email");
             callback.invoke("Invalid userId or email");
         }
+    }
+
+    @ReactMethod
+    public void sendTokenToIntercom(String token, Callback callback) {
+        intercomPushClient.sendTokenToIntercom(getCurrentActivity().getApplication(), token);
+        Log.i(TAG, "sendTokenToIntercom");
+        callback.invoke(null, null);
     }
 
     @ReactMethod
