@@ -60,9 +60,13 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void sendTokenToIntercom(String token, Callback callback) {
-        intercomPushClient.sendTokenToIntercom(getCurrentActivity().getApplication(), token);
-        Log.i(TAG, "sendTokenToIntercom");
-        callback.invoke(null, null);
+        if (getCurrentActivity() != null) {
+            intercomPushClient.sendTokenToIntercom(getCurrentActivity().getApplication(), token);
+            Log.i(TAG, "sendTokenToIntercom");
+            callback.invoke(null, null);
+        } else {
+            Log.e(TAG, "sendTokenToIntercom; getCurrentActivity() is null");
+        }
     }
 
     @ReactMethod
