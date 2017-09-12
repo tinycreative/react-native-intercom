@@ -211,6 +211,17 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void setBottomPadding(int padding, Callback callback) {
+        try {
+            Intercom.client().setBottomPadding(padding);
+
+            callback.invoke(null, null);
+        } catch (Exception ex) {
+            callback.invoke(ex.toString());
+        }
+    }
+
     private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
         ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
         Map<String, Object> deconstructedMap = new HashMap<>();
