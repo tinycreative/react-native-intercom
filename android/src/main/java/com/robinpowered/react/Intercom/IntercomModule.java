@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
+import io.intercom.android.sdk.UserAttributes;
 import io.intercom.android.sdk.identity.Registration;
 import io.intercom.android.sdk.push.IntercomPushClient;
 
@@ -220,11 +221,11 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     private UserAttributes convertToUserAttributes(ReadableMap readableMap) {
         Map<String, Object> map = recursivelyDeconstructReadableMap(readableMap);
-        UserAttributes userAttributes = new UserAttributes.Builder();
+        UserAttributes.Builder builder = new UserAttributes.Builder();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            userAttributes.withCustomAttribute(entry.getKey(), entry.getValue());
+            builder.withCustomAttribute(entry.getKey(), entry.getValue());
         }
-        return userAttributes.build();
+        return builder.build();
     }
 
 
