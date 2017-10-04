@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.identity.Registration;
 import io.intercom.android.sdk.push.IntercomPushClient;
+import io.intercom.android.sdk.UserAttributes;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -88,8 +89,11 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void updateUser(ReadableMap options, Callback callback) {
         try {
-            Map<String, Object> map = recursivelyDeconstructReadableMap(options);
-            Intercom.client().updateUser(map);
+            UserAttributes userAttributes = new UserAttributes.Builder()
+            .withName(options.getString("name"))
+            .withEmail(options.getString("email"))
+            .build();
+            Intercom.client().updateUser(userAttributes);
             Log.i(TAG, "updateUser");
             callback.invoke(null, null);
         } catch (Exception e) {
