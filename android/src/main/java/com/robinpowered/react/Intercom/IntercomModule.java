@@ -88,8 +88,8 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void updateUser(ReadableMap options, Callback callback) {
         try {
-            Map<String, Object> map = recursivelyDeconstructReadableMap(options);
-            Intercom.client().updateUser(map);
+            UserAttributes userAttributes = convertToUserAttributes(options);
+            Intercom.client().updateUser(userAttributes);
             Log.i(TAG, "updateUser");
             callback.invoke(null, null);
         } catch (Exception e) {
@@ -216,6 +216,15 @@ public class IntercomModule extends ReactContextBaseJavaModule {
          Intercom.client().setBottomPadding(padding);
          Log.i(TAG, "setBottomPadding");
          callback.invoke(null, null);
+    }
+
+    private UserAttributes convertToUserAttributes(ReadableMap readableMap) {
+        Map<String, Object> map = recursivelyDeconstructReadableMap(readableMap);
+        UserAttributes userAttributes = new UserAttributes.Builder()
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            userAttributes.withCustomAttribute(entry.getKey(), entry.getValue());
+        }
+        return userAttributes.build();
     }
 
 
