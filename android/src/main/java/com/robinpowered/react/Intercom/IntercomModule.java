@@ -220,7 +220,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     private UserAttributes convertToUserAttributes(ReadableMap readableMap) {
         Map<String, Object> map = recursivelyDeconstructReadableMap(readableMap);
-        UserAttributes userAttributes = new UserAttributes.Builder()
+        UserAttributes userAttributes = new UserAttributes.Builder();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             userAttributes.withCustomAttribute(entry.getKey(), entry.getValue());
         }
