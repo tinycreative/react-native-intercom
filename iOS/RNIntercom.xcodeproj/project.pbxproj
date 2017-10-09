@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		112EE3851CC0AD7F00BF6BB8 /* IntercomWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 112EE3841CC0AD7F00BF6BB8 /* IntercomWrapper.m */; };
+		1AA685A51F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA685A41F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.m */; };
 		DBAD3D711DCC26660027674C /* IntercomEventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD3D701DCC26660027674C /* IntercomEventEmitter.m */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,8 @@
 		112EE36D1CC0AB8A00BF6BB8 /* libRNIntercom.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIntercom.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		112EE3831CC0AD7F00BF6BB8 /* IntercomWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntercomWrapper.h; sourceTree = "<group>"; };
 		112EE3841CC0AD7F00BF6BB8 /* IntercomWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntercomWrapper.m; sourceTree = "<group>"; };
+		1AA685A31F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntercomUserAttributesBuilder.h; sourceTree = "<group>"; };
+		1AA685A41F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntercomUserAttributesBuilder.m; sourceTree = "<group>"; };
 		DBAD3D6F1DCC26660027674C /* IntercomEventEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntercomEventEmitter.h; sourceTree = "<group>"; };
 		DBAD3D701DCC26660027674C /* IntercomEventEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntercomEventEmitter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +49,8 @@
 			isa = PBXGroup;
 			children = (
 				112EE36E1CC0AB8A00BF6BB8 /* Products */,
+				1AA685A31F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.h */,
+				1AA685A41F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.m */,
 				DBAD3D6F1DCC26660027674C /* IntercomEventEmitter.h */,
 				DBAD3D701DCC26660027674C /* IntercomEventEmitter.m */,
 				112EE3831CC0AD7F00BF6BB8 /* IntercomWrapper.h */,
@@ -118,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBAD3D711DCC26660027674C /* IntercomEventEmitter.m in Sources */,
+				1AA685A51F8BFD1B00B92A4E /* IntercomUserAttributesBuilder.m in Sources */,
 				112EE3851CC0AD7F00BF6BB8 /* IntercomWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
