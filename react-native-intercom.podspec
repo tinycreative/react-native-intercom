@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.frameworks   = [ "Intercom" ]
 
-  s.dependency 'Intercom', '> 3'
+  s.dependency 'Intercom', '~> 4.1.0'
 end

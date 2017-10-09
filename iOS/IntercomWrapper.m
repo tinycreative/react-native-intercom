@@ -7,6 +7,7 @@
 //
 
 #import "IntercomWrapper.h"
+#import "IntercomUserAttributesBuilder.h"
 #import <Intercom/Intercom.h>
 
 @implementation IntercomWrapper
@@ -73,11 +74,7 @@ RCT_EXPORT_METHOD(reset:(RCTResponseSenderBlock)callback) {
 RCT_EXPORT_METHOD(updateUser:(NSDictionary*)options callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"updateUser with %@", options);
     NSDictionary* attributes = options;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    // TODO: use updateUser:
-    [Intercom updateUserWithAttributes:attributes];
-#pragma clang diagnostic pop
+    [Intercom updateUser:[IntercomUserAttributesBuilder userAttributesFromDictionary:attributes]];
     callback(@[[NSNull null]]);
 };
 
