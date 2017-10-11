@@ -93,9 +93,22 @@ Intercom.registerIdentifiedUser({ userId: 'bob' });
 ```javascript
 Intercom.registerIdentifiedUser({ userId: 'bob' })
 Intercom.updateUser({
-		email: 'email',
-		name: 'name',
-	});
+    // Pre-defined user attributes
+    // (this attributes will be added in custom_attributes as duplicate)
+    email: 'mimi@intercom.com',
+    user_id: 'user_id',
+    name: 'your name',
+    phone: '010-1234-5678',
+    language_override: 'language_override',
+    signed_up_at: 1004,
+    unsubscribed_from_emails: true,
+    companies: [{
+        // Only supported for iOS now
+        // Parameters: IntercomUserAttribtesBuilder.m -> companyForDictionary()
+    }],
+    // Other custom_attributes
+    ... 
+});
 ```
 
 ### Sign Out
