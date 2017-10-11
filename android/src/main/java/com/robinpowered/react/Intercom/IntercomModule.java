@@ -11,6 +11,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -223,7 +224,29 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         Map<String, Object> map = recursivelyDeconstructReadableMap(readableMap);
         UserAttributes.Builder builder = new UserAttributes.Builder();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            builder.withCustomAttribute(entry.getKey(), entry.getValue());
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (key.equals("email")) {
+                builder.withEmail((String)value);
+            } else if (key.equals("user_id")) {
+                builder.withUserId((String)value);
+            } else if (key.equals("name")) {
+                builder.withName((String)value);
+            } else if (key.equals("phone")) {
+                builder.withPhone((String)value);
+            } else if (key.equals("language_override")) {
+                builder.withLanguageOverride((String)value);
+            } else if (key.equals("signed_up_at")) {
+                Date dateSignedUpAt = new Date((long)value);
+                builder.withSignedUpAt(dateSignedUpAt);
+            } else if (key.equals("unsubscribed_from_emails")) {
+                builder.withUnsubscribedFromEmails((Boolean)value);
+            } else if (key.equals("companies")) {
+                Log.w(TAG, "Not implemented yet");
+                // Note that this parameter is companies for iOS and company for Android
+            }
+
+            builder.withCustomAttribute(key, value);
         }
         return builder.build();
     }
