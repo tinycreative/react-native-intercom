@@ -198,14 +198,16 @@ RCT_EXPORT_METHOD(setupAPN:(NSString*)deviceToken callback:(RCTResponseSenderBlo
 RCT_EXPORT_METHOD(registerForPush:(RCTResponseSenderBlock)callback) {
     NSLog(@"registerForPush");
 
-    UIApplication *application = [UIApplication sharedApplication];
-    [application registerUserNotificationSettings:
-     [UIUserNotificationSettings settingsForTypes:
-      (UIUserNotificationTypeBadge |
-       UIUserNotificationTypeSound |
-       UIUserNotificationTypeAlert)
-                                       categories:nil]];
-    [application registerForRemoteNotifications];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIApplication *application = [UIApplication sharedApplication];
+        [application registerUserNotificationSettings:
+        [UIUserNotificationSettings settingsForTypes:
+        (UIUserNotificationTypeBadge |
+        UIUserNotificationTypeSound |
+        UIUserNotificationTypeAlert)
+                                        categories:nil]];
+        [application registerForRemoteNotifications];
+    });
 
     callback(@[[NSNull null]]);
 };
