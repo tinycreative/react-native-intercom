@@ -89,6 +89,11 @@ Intercom.logEvent('viewed_screen', { extra: 'metadata' });
 Intercom.registerIdentifiedUser({ userId: 'bob' });
 ```
 
+### Register Unidentified user
+```javascript
+Intercom.registerUnidentifiedUser();
+```
+
 ### Register a Logged In user and post extra metadata
 ```javascript
 Intercom.registerIdentifiedUser({ userId: 'bob' })
