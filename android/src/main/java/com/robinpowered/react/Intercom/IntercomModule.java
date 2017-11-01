@@ -241,12 +241,13 @@ public class IntercomModule extends ReactContextBaseJavaModule {
                 builder.withSignedUpAt(dateSignedUpAt);
             } else if (key.equals("unsubscribed_from_emails")) {
                 builder.withUnsubscribedFromEmails((Boolean)value);
+            } else if (key.equals("custom_attributes")) {
+                // value should be a Map here
+                builder.withCustomAttributes((Map)value);
             } else if (key.equals("companies")) {
                 Log.w(TAG, "Not implemented yet");
                 // Note that this parameter is companies for iOS and company for Android
             }
-
-            builder.withCustomAttribute(key, value);
         }
         return builder.build();
     }

@@ -106,8 +106,9 @@ Intercom.updateUser({
         // Only supported for iOS now
         // Parameters: IntercomUserAttribtesBuilder.m -> companyForDictionary()
     }],
-    // Other custom_attributes
-    ... 
+    custom_attributes: {
+        my_custom_attribute: 123
+    },
 });
 ```
 
