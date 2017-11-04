@@ -103,6 +103,11 @@ Intercom.updateUser({
 	});
 ```
 
+### Set User Hash for Identity Validation (optional)
+```javascript
+Intercom.setUserHash(hash_received_from_backend)
+```
+
 ### Sign Out
 ```javascript
 Intercom.reset()
