@@ -155,12 +155,6 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setHMAC(String hmac, String data, Callback callback) {
-        Intercom.client().setSecureMode(hmac, data);
-        callback.invoke(null, null);
-    }
-
-    @ReactMethod
     public void displayConversationsList(Callback callback) {
         Intercom.client().displayConversationsList();
         callback.invoke(null, null);
@@ -316,3 +310,4 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         return deconstructedList;
     }
 }
+
