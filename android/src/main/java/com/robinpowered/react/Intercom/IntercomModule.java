@@ -11,7 +11,6 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.ReadableType;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,16 +19,13 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import io.intercom.android.sdk.Intercom;
-import io.intercom.android.sdk.UserAttributes;
 import io.intercom.android.sdk.identity.Registration;
-import io.intercom.android.sdk.push.IntercomPushClient;
+import io.intercom.android.sdk.UserAttributes;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
     private static final String MODULE_NAME = "IntercomWrapper";
     public static final String TAG = "Intercom";
-
-    private final IntercomPushClient intercomPushClient = new IntercomPushClient();
 
     public IntercomModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -61,17 +57,6 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sendTokenToIntercom(String token, Callback callback) {
-        if (getCurrentActivity() != null) {
-            intercomPushClient.sendTokenToIntercom(getCurrentActivity().getApplication(), token);
-            Log.i(TAG, "sendTokenToIntercom");
-            callback.invoke(null, null);
-        } else {
-            Log.e(TAG, "sendTokenToIntercom; getCurrentActivity() is null");
-        }
-    }
-
-    @ReactMethod
     public void registerUnidentifiedUser(Callback callback) {
         Intercom.client().registerUnidentifiedUser();
         Log.i(TAG, "registerUnidentifiedUser");
@@ -90,8 +75,24 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void updateUser(ReadableMap options, Callback callback) {
         try {
-            UserAttributes userAttributes = convertToUserAttributes(options);
-            Intercom.client().updateUser(userAttributes);
+            if (options.hasKey("name")) {
+                UserAttributes name = new UserAttributes.Builder()
+                                            .withName(options.getString("name"))
+                                            .build();
+                Intercom.client().updateUser(name);
+            }
+            if (options.hasKey("email")) {
+                UserAttributes email = new UserAttributes.Builder()
+                                            .withEmail(options.getString("email"))
+                                            .build();
+                Intercom.client().updateUser(email);              
+            }
+            if (options.hasKey("userId")) {
+                UserAttributes userId = new UserAttributes.Builder()
+                                            .withCustomAttribute("userId", options.getString("userId"))
+                                            .build();
+                Intercom.client().updateUser(userId);
+            }
             Log.i(TAG, "updateUser");
             callback.invoke(null, null);
         } catch (Exception e) {
@@ -149,14 +150,8 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setUserHash(String userHash, Callback callback) {
-        Intercom.client().setUserHash(userHash);
-        callback.invoke(null, null);
-    }
-
-    @ReactMethod
-    public void setHMAC(String hmac, String data, Callback callback) {
-        Intercom.client().setSecureMode(hmac, data);
+    public void setHMAC(String hmac, Callback callback) {
+        Intercom.client().setUserHash(hmac);
         callback.invoke(null, null);
     }
 
@@ -212,46 +207,6 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             callback.invoke(ex.toString());
         }
     }
-    
-    @ReactMethod
-    public void setBottomPadding( Integer padding, Callback callback) {
-         Intercom.client().setBottomPadding(padding);
-         Log.i(TAG, "setBottomPadding");
-         callback.invoke(null, null);
-    }
-
-    private UserAttributes convertToUserAttributes(ReadableMap readableMap) {
-        Map<String, Object> map = recursivelyDeconstructReadableMap(readableMap);
-        UserAttributes.Builder builder = new UserAttributes.Builder();
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (key.equals("email")) {
-                builder.withEmail((String)value);
-            } else if (key.equals("user_id")) {
-                builder.withUserId((String)value);
-            } else if (key.equals("name")) {
-                builder.withName((String)value);
-            } else if (key.equals("phone")) {
-                builder.withPhone((String)value);
-            } else if (key.equals("language_override")) {
-                builder.withLanguageOverride((String)value);
-            } else if (key.equals("signed_up_at")) {
-                Date dateSignedUpAt = new Date((long)value);
-                builder.withSignedUpAt(dateSignedUpAt);
-            } else if (key.equals("unsubscribed_from_emails")) {
-                builder.withUnsubscribedFromEmails((Boolean)value);
-            } else if (key.equals("custom_attributes")) {
-                // value should be a Map here
-                builder.withCustomAttributes((Map)value);
-            } else if (key.equals("companies")) {
-                Log.w(TAG, "Not implemented yet");
-                // Note that this parameter is companies for iOS and company for Android
-            }
-        }
-        return builder.build();
-    }
-
 
     private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
         ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
@@ -316,3 +271,4 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         return deconstructedList;
     }
 }
+
