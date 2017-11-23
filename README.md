@@ -50,8 +50,31 @@ Initialize Intercom in your `AppDelegate.m`
 
 More instructions here: [Intercom for Android](https://github.com/intercom/intercom-android)
 
-```
-Intercom.initialize(getApplicationContext(), "your api key", "your app id");
+Your Android Application should look like:
+
+```java
+// ...
+import com.robinpowered.react.Intercom.IntercomPackage;
+import io.intercom.android.sdk.Intercom;
+
+public class MainApplication extends MultiDexApplication {
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Intercom.initialize(this, "your api key", "your app id");
+    // ...
+  }
+  
+  public List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+        // ...
+        new IntercomPackage()
+	// ...
+    );
+  }
+}
+
 ```
 
 And in your *AndroidManifest.xml* file add the following lines within the `<application> ... </application>` tags
@@ -70,7 +93,7 @@ And in your *AndroidManifest.xml* file add the following lines within the `<appl
      tools:replace="android:exported"
      android:exported="true" />
 ```
-Make sure to add *xmlns:tools="http://schemas.android.com/tools"* in your main `<application>` tag
+Make sure to add `xmlns:tools="http://schemas.android.com/tools"` in your main `<application>` tag
 
 Usage
 =====
