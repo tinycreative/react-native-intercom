@@ -82,7 +82,9 @@ And in your *AndroidManifest.xml* should look like
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.myapp"
 	  ...
+	  ... don't forget to add this tools namespace ...
           xmlns:tools="http://schemas.android.com/tools"
+          ...
     >
 
   <application 
