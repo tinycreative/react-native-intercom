@@ -64,7 +64,7 @@ RCT_EXPORT_METHOD(reset:(RCTResponseSenderBlock)callback) {
     NSLog(@"reset");
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Intercom reset];
+        [Intercom logout];
     });
 
     callback(@[[NSNull null]]);
