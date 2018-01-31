@@ -15,14 +15,31 @@ export function registerUnidentifiedUser(): Promise<void>;
 
 /**
  * updateUser
- * @param { email?: string, user_id?: string, name?: string, phone?: string, language_override?: string, signed_up_at?: number, unsubscribed_from_emails?: boolean, companies?: object[], custom_attributes?: { [key: string]: string }} attributes
+ * @param { email?: string,user_id?: string, name?: string, phone?: string, language_override?: string, signed_up_at?: number, unsubscribed_from_emails?: boolean, companies?: Array<{company_id?: string, name?: string, created_at?: number, monthly_spend?: number, plan?: string, custom_attributes?: { [key: string]: string } }>, custom_attributes?: { [key: string]: string } } attributes
  * @returns {Promise<void>}
  */
-export function updateUser(attributes: { email?: string, user_id?: string, name?: string, phone?: string, language_override?: string, signed_up_at?: number, unsubscribed_from_emails?: boolean, companies?: object[], custom_attributes?: { [key: string]: string }}): Promise<void>;
+export function updateUser(attributes: {
+  email?: string;
+  user_id?: string;
+  name?: string;
+  phone?: string;
+  language_override?: string;
+  signed_up_at?: number;
+  unsubscribed_from_emails?: boolean;
+  companies?: Array<{
+    company_id?: string;
+    name?: string;
+    created_at?: number;
+    monthly_spend?: number;
+    plan?: string;
+    custom_attributes?: { [key: string]: string };
+  }>;
+  custom_attributes?: { [key: string]: string };
+}): Promise<void>;
 
 /**
  * registerIdentifiedUser
- * @param {{userId: string}} options
+ * @param {userId: string} options
  * @returns {Promise<void>}
  */
 export function registerIdentifiedUser(options: { userId: string }): Promise<void>;
