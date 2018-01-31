@@ -14,12 +14,11 @@ export function sendTokenToIntercom(token: any): Promise<void>;
 export function registerUnidentifiedUser(): Promise<void>;
 
 /**
- * We can basically pass any people attributes that exist in intercom. But right now we type specifically the ones
- * we use.
- * @param {email: string, name: string} attributes
+ * updateUser
+ * @param { email?: string, user_id?: string, name?: string, phone?: string, language_override?: string, signed_up_at?: number, unsubscribed_from_emails?: boolean, companies?: object[], custom_attributes?: { [key: string]: string }} attributes
  * @returns {Promise<void>}
  */
-export function updateUser(attributes: { email: string, name: string }): Promise<void>;
+export function updateUser(attributes: { email?: string, user_id?: string, name?: string, phone?: string, language_override?: string, signed_up_at?: number, unsubscribed_from_emails?: boolean, companies?: object[], custom_attributes?: { [key: string]: string }}): Promise<void>;
 
 /**
  * registerIdentifiedUser
