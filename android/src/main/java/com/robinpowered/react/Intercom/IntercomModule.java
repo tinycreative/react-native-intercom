@@ -173,6 +173,12 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void displayHelpCenter(Callback callback) {
+        Intercom.client().displayHelpCenter();
+        callback.invoke(null, null);
+    }
+
     private Intercom.Visibility visibilityStringToVisibility(String visibility) {
       if (visibility.equalsIgnoreCase("VISIBLE")) {
         return Intercom.Visibility.VISIBLE;

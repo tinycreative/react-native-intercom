@@ -100,6 +100,12 @@ export function displayConversationsList(): Promise<void>;
 export function getUnreadConversationCount(): Promise<void>;
 
 /**
+ * displayHelpCenter
+ * @returns {Promise<void>}
+ */
+export function displayHelpCenter(): Promise<void>;
+
+/**
  * setLauncherVisibility
  * @param {string} visibility
  * @returns {Promise<void>}
