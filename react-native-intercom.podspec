@@ -15,4 +15,5 @@ Pod::Spec.new do |s|
   s.frameworks   = [ "Intercom" ]
 
   s.dependency 'Intercom', '~> 4.1.0'
+  s.dependency 'React'
 end
