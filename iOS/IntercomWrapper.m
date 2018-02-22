@@ -163,6 +163,17 @@ RCT_EXPORT_METHOD(getUnreadConversationCount:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null], unread_conversations]);
 }
 
+// Available as NativeModules.IntercomWrapper.displayHelpCenter
+RCT_EXPORT_METHOD(displayHelpCenter:(RCTResponseSenderBlock)callback) {
+    NSLog(@"displayHelpCenter");
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Intercom presentHelpCenter];
+    });
+    
+    callback(@[[NSNull null]]);
+};
+
 // Available as NativeModules.IntercomWrapper.setLauncherVisibility
 RCT_EXPORT_METHOD(setLauncherVisibility:(NSString*)visibilityString callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"setVisibility with %@", visibilityString);

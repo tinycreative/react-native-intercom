@@ -222,6 +222,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"~/Documents/Intercom",
 					"$(SRCROOT)/../../../ios/Pods/**",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -241,6 +242,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"~/Documents/Intercom",
 					"$(SRCROOT)/../../../ios/Pods/**",
 				);
 				HEADER_SEARCH_PATHS = (

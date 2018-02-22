@@ -173,6 +173,12 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void displayHelpCenter(Callback callback) {
+        Intercom.client().displayHelpCenter();
+        callback.invoke(null, null);
+    }
+
     private Intercom.Visibility visibilityStringToVisibility(String visibility) {
       if (visibility.equalsIgnoreCase("VISIBLE")) {
         return Intercom.Visibility.VISIBLE;
@@ -231,7 +237,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             } else if (key.equals("language_override")) {
                 builder.withLanguageOverride((String)value);
             } else if (key.equals("signed_up_at")) {
-                Date dateSignedUpAt = new Date((long)value);
+                Date dateSignedUpAt = new Date(((Number)value).longValue());
                 builder.withSignedUpAt(dateSignedUpAt);
             } else if (key.equals("unsubscribed_from_emails")) {
                 builder.withUnsubscribedFromEmails((Boolean)value);

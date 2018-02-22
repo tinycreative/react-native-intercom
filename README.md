@@ -50,27 +50,70 @@ Initialize Intercom in your `AppDelegate.m`
 
 More instructions here: [Intercom for Android](https://github.com/intercom/intercom-android)
 
-```
-Intercom.initialize(getApplicationContext(), "your api key", "your app id");
+Your Android Application should look like:
+
+```java
+// ...
+import com.robinpowered.react.Intercom.IntercomPackage;
+import io.intercom.android.sdk.Intercom;
+
+public class MainApplication extends Application {
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Intercom.initialize(this, "your api key", "your app id");
+    // ...
+  }
+  
+  public List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+        // ...
+        new IntercomPackage()
+	// ...
+    );
+  }
+}
+
 ```
 
-And in your *AndroidManifest.xml* file add the following lines within the `<application> ... </application>` tags
+And in your *AndroidManifest.xml* should look like
 ```xml
-<service
-     android:name="com.robinpowered.react.Intercom.IntercomIntentService"
-     android:exported="false">
-     <intent-filter
-        android:priority="999">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.myapp"
+	  ...
+	  ... add the tools namespace if not already present...
+          xmlns:tools="http://schemas.android.com/tools"
+          ...
+    >
+
+  <application 
+	       ...
+	       >
+
+    ...
+    ...
+    ...
+
+    <!-- Add these lines -->
+    <service
+        android:name="com.robinpowered.react.Intercom.IntercomIntentService"
+        android:exported="false">
+      <intent-filter
+          android:priority="999">
         <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-    </intent-filter>
-</service>
- 
- <receiver
-     android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver"
-     tools:replace="android:exported"
-     android:exported="true" />
+      </intent-filter>
+    </service>
+    <receiver
+        android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver"
+        tools:replace="android:exported"
+        android:exported="true" />
+	
+  </application>
+</manifest>
 ```
-Make sure to add *xmlns:tools="http://schemas.android.com/tools"* in your main `<application>` tag
+
+Don't forget the *tools* namespace `xmlns:tools="http://schemas.android.com/tools"` in your main `<application>` tag
 
 Usage
 =====
@@ -114,6 +157,11 @@ Intercom.updateUser({
         my_custom_attribute: 123
     },
 });
+```
+
+### Set User Hash for Identity Validation (optional)
+```javascript
+Intercom.setUserHash(hash_received_from_backend)
 ```
 
 ### Sign Out
