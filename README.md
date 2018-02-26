@@ -150,8 +150,8 @@ Intercom.updateUser({
     signed_up_at: 1004,
     unsubscribed_from_emails: true,
     companies: [{
-        // Only supported for iOS now
-        // Parameters: IntercomUserAttribtesBuilder.m -> companyForDictionary()
+        company_id: 'your company id',
+        name: 'your company name'
     }],
     custom_attributes: {
         my_custom_attribute: 123
