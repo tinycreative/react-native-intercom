@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.source_files = 'iOS/*.{h,m}'
   s.platform     = :ios, '8.0'
   s.frameworks   = [ "Intercom" ]
-
-  s.dependency 'Intercom', '~> 4.1.0'
+  s.static_framework = true
+  s.dependency 'React/Core'
+  s.dependency 'Intercom', '~> 4.1.9'
 end
