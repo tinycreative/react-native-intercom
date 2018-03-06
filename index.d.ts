@@ -49,7 +49,11 @@ export function registerIdentifiedUser(options: { userId: string }): Promise<voi
  * @returns {Promise<void>}
  */
 export function reset(): Promise<void>;
-
+/**
+ * logout
+ * @returns {Promise<void>}
+ */
+export function logout(): Promise<void>;
 /**
  * Log an event
  * @param {string} eventName
