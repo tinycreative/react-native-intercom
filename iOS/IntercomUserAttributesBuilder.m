@@ -32,7 +32,7 @@
         attributes.signedUpAt = [self dateValueForKey:@"signed_up_at" inDictionary:attributesDict];
     }
     if ([self stringValueForKey:@"unsubscribed_from_emails" inDictionary:attributesDict]) {
-        attributes.unsubscribedFromEmails = [self stringValueForKey:@"unsubscribed_from_emails" inDictionary:attributesDict];
+        attributes.unsubscribedFromEmails = [[attributesDict objectForKey:@"unsubscribed_from_emails"] boolValue];
     }
     if (attributesDict[@"custom_attributes"]) {
         attributes.customAttributes = attributesDict[@"custom_attributes"];
