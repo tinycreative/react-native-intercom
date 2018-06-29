@@ -122,7 +122,9 @@ Don't forget the _tools_ namespace `xmlns:tools="http://schemas.android.com/tool
 # Methods
 
 ### logEvent('event_name', { any: 'metadata', you: 'want' });
+Log an event with intercom.
 ### registerIdentifiedUser({ userId: 'bob' })
+Register a user with userId
 ### registerUnidentifiedUser()
 For when a userId is not available or relevant
 ### setLauncherVisibility('VISIBLE' | 'HIDDEN');
@@ -158,11 +160,12 @@ Set User Hash for Identity Validation (optional)
 Log user out
 ### displayMessenger()
 Show messenger overlay
-### hideMessenger()
 ### displayMessageComposer()
 Same as displayMessenger
 ### displayMessageComposerWithInitialMessage('Initial Message')
 Show Message Composer with an Initial Message
+### hideMessenger()
+Hide messenger overlay (works with any of the 3 above)
 ### displayHelpCenter()
 Show Help Center
 ### displayConversationsList()
@@ -186,7 +189,7 @@ _onUnreadChange = ({ count }) => {
 	//...
 }
 ```
-### removeEventListener(Intercom.Notifications.UNREAD_COUNT
+### removeEventListener(Intercom.Notifications.UNREAD_COUNT)
 Removes event listener
 ### sendTokenToIntercom(token)
 Send FCM token directly to Intercom. Does nothing in iOS (that's handled with the setDeviceToken native code in the iOS instructions). Example: 
