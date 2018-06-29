@@ -121,19 +121,55 @@ Don't forget the _tools_ namespace `xmlns:tools="http://schemas.android.com/tool
 
 # Methods
 
-### logEvent('event_name', { any: 'metadata', you: 'want' });
+### logEvent(eventName, metadata);
+
 Log an event with intercom.
-### registerIdentifiedUser({ userId: 'bob' })
-Register a user with userId
-### registerUnidentifiedUser()
-For when a userId is not available or relevant
-### setLauncherVisibility('VISIBLE' | 'HIDDEN');
-Show/hide the launcher button (hidden by default).
-### setBottomPadding(64)
-Set the bottom padding for the launcher button
-### updateUser(userAttributes)
-Updates a registered user. Example:
+
 ```javascript
+Intercom.logEvent('event_name', { any: 'metadata', you: 'want' });
+```
+
+### registerIdentifiedUser({ userId })
+
+Register a user with userId
+
+```javascript
+Intercom.registerIdentifiedUser({ userId: 'bob' });
+```
+
+### registerUnidentifiedUser()
+
+For when a userId is not available or relevant
+
+```javascript
+Intercom.registerUnidentifiedUser();
+```
+
+### setLauncherVisibility('VISIBLE' | 'HIDDEN');
+
+Show/hide the launcher button (hidden by default).
+
+```javascript
+// show
+Intercom.setLauncherVisibility('VISIBLE');
+// hide
+Intercom.setLauncherVisibility('HIDDEN');
+```
+
+### setBottomPadding(dpi)
+
+Set the bottom padding for the launcher button
+
+```javascript
+Intercom.setBottomPadding(64);
+```
+
+### updateUser(userAttributes)
+
+Updates a registered user.
+
+```javascript
+Intercom.registerIdentifiedUser({ userId: 'bob' });
 Intercom.updateUser({
   // Pre-defined user attributes
   email: 'mimi@intercom.com',
@@ -154,28 +190,96 @@ Intercom.updateUser({
   },
 });
 ```
-### setUserHash(hash_received_from_backend)
+
+### setUserHash(hash)
+
 Set User Hash for Identity Validation (optional)
+
+```javascript
+Intercom.setUserHash(hash_received_from_backend);
+```
+
 ### reset()
+
 Log user out
+
+```javascript
+Intercom.reset();
+```
+
 ### displayMessenger()
+
 Show messenger overlay
+
+```javascript
+Intercom.displayMessenger();
+```
+
 ### displayMessageComposer()
+
 Same as displayMessenger
-### displayMessageComposerWithInitialMessage('Initial Message')
+
+```javascript
+Intercom.displayMessageComposer();
+```
+
+### displayMessageComposerWithInitialMessage(message)
+
 Show Message Composer with an Initial Message
+
+```javascript
+Intercom.displayMessageComposerWithInitialMessage('Initial message');
+```
+
 ### hideMessenger()
+
 Hide messenger overlay (works with any of the 3 above)
+
+```javascript
+Intercom.hideMessenger();
+```
+
 ### displayHelpCenter()
+
 Show Help Center
+
+```javascript
+Intercom.displayHelpCenter();
+```
+
 ### displayConversationsList()
+
 Show Conversation List
+
+```javascript
+Intercom.displayConversationsList();
+```
+
 ### setInAppMessageVisibility('GONE' | 'VISIBLE')
+
 If set to 'GONE', hides in app messages
+
+```javascript
+// hide in app messages
+Intercom.setInAppMessageVisibility('GONE');
+// show in app messages
+Intercom.setInAppMessageVisibility('VISIBLE');
+```
+
 ### getUnreadConversationCount()
+
 Get Unread Message Count
+
+```javascript
+Intercom.getUnreadConversationCount((err, count) => {
+  console.log(`${count} conversations waiting`);
+});
+```
+
 ### addEventListener(Intercom.Notifications.UNREAD_COUNT)
-Listen for Unread Conversation Notifications. Example: 
+
+Listen for Unread Conversation Notifications. Example:
+
 ```javascript
 componentDidMount() {
 	Intercom.addEventListener(Intercom.Notifications.UNREAD_COUNT, this._onUnreadChange)
@@ -189,10 +293,15 @@ _onUnreadChange = ({ count }) => {
 	//...
 }
 ```
+
 ### removeEventListener(Intercom.Notifications.UNREAD_COUNT)
+
 Removes event listener
+
 ### sendTokenToIntercom(token)
-Send FCM token directly to Intercom. Does nothing in iOS (that's handled with the setDeviceToken native code in the iOS instructions). Example: 
+
+Send FCM token directly to Intercom. Does nothing in iOS (that's handled with the setDeviceToken native code in the iOS instructions). Example:
+
 ```javascript
 Firebase.messaging()
   .getToken()
@@ -201,7 +310,21 @@ Firebase.messaging()
     Intercom.sendTokenToIntercom(token);
   });
 ```
+
 ### setupAPN(deviceToken)
+
 Set up iOS push notifications, passing in the device token.
+
+```javascript
+Intercom.setupAPN('my-unique-device-token');
+```
+
 ### registerForPush()
+
 Register device for push notifications
+
+Set up iOS push notifications, passing in the device token.
+
+```javascript
+Intercom.registerForPush();
+```
