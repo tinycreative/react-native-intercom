@@ -40,4 +40,8 @@ RCT_EXPORT_MODULE();
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++ (BOOL)requiresMainQueueSetup {
+    return YES;
+}
+
 @end
