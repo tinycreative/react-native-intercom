@@ -3,50 +3,62 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
 # Installation Guide
 
-1. Add `pod 'Intercom'` to `ios/Podfile` and then run `pod install` in the `ios` directory to install the cocoapod.
-2. Open `ios/Podfile` and add `pod 'Intercom'`. It will look something like this:
+1. [Install Intercom for iOS](https://developers.intercom.com/installing-intercom/docs/ios-installation) via whichever method you prefer.
 
-    ```obj-c
-    platform :ios, '9.2'
+    More recently others have had more success [Installing Intercom Manually](https://developers.intercom.com/installing-intercom/docs/ios-installation#section-option-3-install-intercom-manually).
 
-    target 'YOUR_APP_NAME' do
-      # Add Intercom here…
-      pod 'Intercom'
-    end
+    In the past, [installing via CocoaPods](https://developers.intercom.com/installing-intercom/docs/ios-installation#section-option-1-cocoapods) was recommended.
+
+
+1. Install `react-native-intercom`:
+
+    ```bash
+    yarn add react-native-intercom  # or npm install react-native-intercom
     ```
 
-3. In the `ios` directory, run `pod install` to install the cocoapod.
-4. Run `npm install react-native-intercom` (or `yarn add react-native-intercom`).
-5. Run `react-native link` to link the package.
+    Others have reported issues with the current 11.x version and recommend installing the 10.2.0 version:
 
-    This will perform some of the linking of `react-native-intercom`. This includes adding `pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'` to `ios/Podfile`. In the future the `link` command can be added to do more of the steps in this installation guide.
+    ```bash
+    yarn add react-native-intercom@10.2.0  # or npm install react-native-intercom@10.2.0
+    ```
 
-6. Manually Link the library in Xcode ([Linking librarys on iOS](https://facebook.github.io/react-native/docs/linking-libraries-ios.html))
+1. Link native dependencies
+
+    ```bash
+    react-native link react-native-intercom
+    ```
+
+1. Manually Link the library in Xcode ([Linking librarys on iOS](https://facebook.github.io/react-native/docs/linking-libraries-ios.html))
 
     1. Open Xcode -> Right click "[Your Project Name]/Libraries" folder and select "Add File to [Your Project Name]" -> Select `RNIntercom.xcodeproj` located in `node_modules/react-native-intercom/iOS`.
-    2. Open "General Settings" -> "Build Phases" -> "Link Binary with Libraries" and add `libRNIntercom.a`
+    1. Open "General Settings" -> "Build Phases" -> "Link Binary with Libraries" and add `libRNIntercom.a`
 
-7. Config for iOS ([intercom-ios](https://github.com/intercom/intercom-ios))
+1. Config for iOS ([intercom-ios](https://github.com/intercom/intercom-ios))
 
     1. Add `#import "Intercom/intercom.h"` with the other imports at the top of `ios/YOUR_PROJECT/AppDelegate.m`.
-    2. Initialize Intercom in `ios/YOUR_PROJECT/AppDelegate.m` with your Intercom iOS API Key and your Intercom App ID:
+    1. Initialize Intercom in `ios/YOUR_PROJECT/AppDelegate.m` with your Intercom iOS API Key and your Intercom App ID:
 
         ```obj-c
         - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-            // Initialize Intercom
+
+            // Intercom
             [Intercom setApiKey:@"YOUR_IOS_API_KEY_HERE" forAppId:@"YOUR_APP_ID_HERE"];
+
         }
         ```
 
-    3. Optional, [Intercom's documentation](https://github.com/intercom/intercom-ios/blob/1fe2e92c4913e4ffef290b5b62dac5ecef74ea1d/Intercom.framework/Versions/A/Headers/Intercom.h#L65) suggests adding the following call in order to receive push notifications for new messages:
+    1. Optional, [Intercom's documentation](https://github.com/intercom/intercom-ios/blob/1fe2e92c4913e4ffef290b5b62dac5ecef74ea1d/Intercom.framework/Versions/A/Headers/Intercom.h#L65) suggests adding the following call in order to receive push notifications for new messages:
 
         ```obj-c
         - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+
+            // Intercom
             [Intercom setDeviceToken:deviceToken];
+
         }
         ```
 
-    4. Optional, [allow access to phots on iOS](https://developers.intercom.com/docs/ios-installation#section-step-2-update-infoplist). Open `Info.plist` in Xcode and add a new key "Privacy - Photo Library Usage Description". Or alternately, open `ios/YOUR_PROJECT/Info.plist` and add:
+    1. Optional, [allow access to phots on iOS](https://developers.intercom.com/docs/ios-installation#section-step-2-update-infoplist). Open `Info.plist` in Xcode and add a new key "Privacy - Photo Library Usage Description". Or alternately, open `ios/YOUR_PROJECT/Info.plist` and add:
 
         ```xml
         <dict>
@@ -61,7 +73,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         </dict>
         ```
 
-8. Config for Android ([intercom-android](https://github.com/intercom/intercom-android))
+1. Config for Android ([intercom-android](https://github.com/intercom/intercom-android))
 
     1. In `android/app/src/main/java/com/YOUR_APP/app/MainApplication.java`, add the following code in the respective sections of the file using your Intercom Android API Key and Intercom App ID:
 
@@ -97,7 +109,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-    2. In `android/app/src/main/AndroidManifest.xml`, add the following code in the respective sections of the file:
+    1. In `android/app/src/main/AndroidManifest.xml`, add the following code in the respective sections of the file:
 
         ```xml
         <?xml version="1.0" encoding="utf-8"?>
@@ -131,7 +143,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         </manifest>
         ```
 
-    3. In `android/build.gradle` add `maven { url "https://maven.google.com" }` ([h/t](https://github.com/tinycreative/react-native-intercom/issues/153#issuecomment-348602868)):
+    1. In `android/build.gradle` add `maven { url "https://maven.google.com" }` ([h/t](https://github.com/tinycreative/react-native-intercom/issues/153#issuecomment-348602868)):
 
         ```gradle
         allprojects {
@@ -144,7 +156,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-    4. Decide which type of push messaging you want to install, and add choosen method to `android/app/build.gradle`. If "Google Cloud Messaging (GCM)", then:
+    1. Decide which type of push messaging you want to install, and add choosen method to `android/app/build.gradle`. If "Google Cloud Messaging (GCM)", then:
 
         ```gradle
         dependencies {
@@ -155,7 +167,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-9. Import Intercom and use methods
+1. Import Intercom and use methods
 
     ```javascript
     import Intercom from 'react-native-intercom';
