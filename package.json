@@ -1,6 +1,6 @@
 {
   "name": "react-native-intercom",
-  "version": "12.0.0",
+  "version": "12.1.0",
   "description": "A React Native client for Intercom.io",
   "main": "./lib/IntercomClient.js",
   "scripts": {
