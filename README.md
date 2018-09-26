@@ -58,7 +58,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-    1. Optional, [allow access to phots on iOS](https://developers.intercom.com/docs/ios-installation#section-step-2-update-infoplist). Open `Info.plist` in Xcode and add a new key "Privacy - Photo Library Usage Description". Or alternately, open `ios/YOUR_PROJECT/Info.plist` and add:
+    1. Optional, [allow access to photos on iOS](https://developers.intercom.com/docs/ios-installation#section-step-2-update-infoplist). Open `Info.plist` in Xcode and add a new key "Privacy - Photo Library Usage Description". Or alternately, open `ios/YOUR_PROJECT/Info.plist` and add:
 
         ```xml
         <dict>
