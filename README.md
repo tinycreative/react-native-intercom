@@ -272,6 +272,11 @@ _onUnreadChange = ({ count }) => {
   //...
 }
 ```
+### Other Notifications
+```javascript
+    // The window was hidden
+    Intercom.Notifications.WINDOW_DID_HIDE
+```
 
 ### Send FCM token directly to Intercom
 ```
