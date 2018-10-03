@@ -7,7 +7,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
     More recently others have had more success [Installing Intercom Manually](https://developers.intercom.com/installing-intercom/docs/ios-installation#section-option-3-install-intercom-manually).
 
-    In the past, [installing via CocoaPods](https://developers.intercom.com/installing-intercom/docs/ios-installation#section-option-1-cocoapods) was recommended.
+    In the past, [installing via CocoaPods](https://developers.intercom.com/installing-intercom/docs/ios-installation#section-option-1-cocoapods) was recommended. If you are going to use it, see the note after linking.
 
 
 1. Install `react-native-intercom`:
@@ -27,6 +27,8 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
     ```bash
     react-native link react-native-intercom
     ```
+    
+    N.B. If CocoaPods was used for the installation of the Intercom library. Remove the link to node_modules from the Podfile and run `pod install again`. This line needs to be removed: `pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'`
 
 1. Manually Link the library in Xcode ([Linking librarys on iOS](https://facebook.github.io/react-native/docs/linking-libraries-ios.html))
 
