@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile 'io.intercom.android:intercom-sdk-base:5.+'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'io.intercom.android:intercom-sdk-base:5.+'
 }
 
