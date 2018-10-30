@@ -80,9 +80,9 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void reset(@Nullable Callback callback) {
-        Intercom.client().reset();
-        Log.i(TAG, "reset");
+    public void logout(@Nullable Callback callback) {
+        Intercom.client().logout();
+        Log.i(TAG, "logout");
         if (callback != null) {
             callback.invoke(null, null);
         }

@@ -45,10 +45,10 @@ export function updateUser(attributes: {
 export function registerIdentifiedUser(options: { userId: string }): Promise<void>;
 
 /**
- * reset
+ * logout
  * @returns {Promise<void>}
  */
-export function reset(): Promise<void>;
+export function logout(): Promise<void>;
 
 /**
  * Log an event

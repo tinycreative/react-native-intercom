@@ -240,7 +240,7 @@ Intercom.setUserHash(hash_received_from_backend)
 
 ### Sign Out
 ```javascript
-Intercom.reset()
+Intercom.logout()
 ```
 
 ### Show Message Composer

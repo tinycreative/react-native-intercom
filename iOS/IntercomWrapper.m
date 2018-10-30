@@ -59,9 +59,9 @@ RCT_EXPORT_METHOD(registerUnidentifiedUser:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null]]);
 };
 
-// Available as NativeModules.IntercomWrapper.reset
-RCT_EXPORT_METHOD(reset:(RCTResponseSenderBlock)callback) {
-    NSLog(@"reset");
+// Available as NativeModules.IntercomWrapper.logout
+RCT_EXPORT_METHOD(logout:(RCTResponseSenderBlock)callback) {
+    NSLog(@"logout");
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [Intercom logout];
