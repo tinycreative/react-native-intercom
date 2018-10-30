@@ -1,5 +1,15 @@
-export type Visibility = 'GONE' | 'VISIBLE';
-export type Notifications = 'UNREAD_CHANGE_NOTIFICATION';
+interface IVisibility {
+  GONE: 'GONE';
+  VISIBLE: 'VISIBLE';
+}
+declare const Visibility: IVisibility;
+type VisibilityType = IVisibility[keyof IVisibility];
+
+interface INotifications {
+  UNREAD_COUNT: 'UNREAD_CHANGE_NOTIFICATION';
+  WINDOW_DID_HIDE: 'WINDOW_DID_HIDE';
+}
+declare const Notifications: INotifications;
 
 /**
  * sendTokenToIntercom
@@ -97,7 +107,7 @@ export function displayConversationsList(): Promise<void>;
  * getUnreadConversationCount
  * @returns {Promise<void>}
  */
-export function getUnreadConversationCount(): Promise<void>;
+export function getUnreadConversationCount(): Promise<number>;
 
 /**
  * displayHelpCenter
@@ -110,14 +120,14 @@ export function displayHelpCenter(): Promise<void>;
  * @param {string} visibility
  * @returns {Promise<void>}
  */
-export function setLauncherVisibility(visibility: Visibility): Promise<void>;
+export function setLauncherVisibility(visibility: VisibilityType): Promise<void>;
 
 /**
  * setLauncherVisibility
  * @param {string} visibility
  * @returns {Promise<void>}
  */
-export function setInAppMessageVisibility(visibility: Visibility): Promise<void>;
+export function setInAppMessageVisibility(visibility: VisibilityType): Promise<void>;
 
 /**
  * setupAPN
