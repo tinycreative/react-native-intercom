@@ -278,7 +278,7 @@ _onUnreadChange = ({ count }) => {
     Intercom.Notifications.WINDOW_DID_HIDE
 ```
 
-### Send FCM token directly to Intercom
+### Send FCM token directly to Intercom for push notifications (Android only)
 ```
 Firebase.messaging().getToken()
   .then((token) => {
