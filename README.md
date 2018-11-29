@@ -166,6 +166,17 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
           compile 'io.intercom.android:intercom-sdk:5.+'
         }
         ```
+        If "Firebase Cloud Messaging(FCM)", then:
+
+        ```gradle
+        dependencies {
+
+          //...other configuration here...
+
+          compile 'io.intercom.android:intercom-sdk-fcm:5.+'
+          compile 'com.google.firebase:firebase-messaging:11.+'
+        }
+        ```
 
 1. Import Intercom and use methods
 
