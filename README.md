@@ -281,6 +281,9 @@ _onUnreadChange = ({ count }) => {
 ```javascript
     // The window was hidden
     Intercom.Notifications.WINDOW_DID_HIDE
+
+    // The window was shown
+    Intercom.Notifications.WINDOW_DID_SHOW
 ```
 
 ### Send FCM token directly to Intercom for push notifications (Android only)
