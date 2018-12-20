@@ -16,12 +16,6 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
     yarn add react-native-intercom  # or npm install react-native-intercom
     ```
 
-    Others have reported issues with the current 11.x version and recommend installing the 10.2.0 version:
-
-    ```bash
-    yarn add react-native-intercom@10.2.0  # or npm install react-native-intercom@10.2.0
-    ```
-
 1. Link native dependencies
 
     ```bash
@@ -166,6 +160,17 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
           compile 'io.intercom.android:intercom-sdk:5.+'
         }
         ```
+        If "Firebase Cloud Messaging(FCM)", then:
+
+        ```gradle
+        dependencies {
+
+          //...other configuration here...
+
+          compile 'io.intercom.android:intercom-sdk-fcm:5.+'
+          compile 'com.google.firebase:firebase-messaging:11.+'
+        }
+        ```
 
 1. Import Intercom and use methods
 
@@ -240,7 +245,7 @@ Intercom.setUserHash(hash_received_from_backend)
 
 ### Sign Out
 ```javascript
-Intercom.reset()
+Intercom.logout()
 ```
 
 ### Show Message Composer
@@ -276,9 +281,12 @@ _onUnreadChange = ({ count }) => {
 ```javascript
     // The window was hidden
     Intercom.Notifications.WINDOW_DID_HIDE
+
+    // The window was shown
+    Intercom.Notifications.WINDOW_DID_SHOW
 ```
 
-### Send FCM token directly to Intercom
+### Send FCM token directly to Intercom for push notifications (Android only)
 ```
 Firebase.messaging().getToken()
   .then((token) => {
