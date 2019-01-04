@@ -155,14 +155,14 @@ export function setBottomPadding(padding: number): Promise<void>;
  * @param {string} type
  * @param {() => void} handler
  */
-export function addEventListener(type: string, handler: () => void): void;
+export function addEventListener(type: string, handler: (event?: any) => void): void;
 
 /**
  * removeEventListener
  * @param {string} type
  * @param {() => void} handler
  */
-export function removeEventListener(type: string, handler: () => void): void;
+export function removeEventListener(type: string, handler: (event?: any) => void): void;
 
 /**
  * To enable iOS push notifications, simply call the following anywhere in your code:
