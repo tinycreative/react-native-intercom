@@ -103,40 +103,6 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-    1. In `android/app/src/main/AndroidManifest.xml`, add the following code in the respective sections of the file:
-
-        ```xml
-        <?xml version="1.0" encoding="utf-8"?>
-        <manifest package="com.myapp"
-
-          ...other configuration here...
-
-        >
-          <application
-
-            ...other configuration here...
-
-            xmlns:tools="http://schemas.android.com/tools"
-          >
-
-            <!-- ...other configuration here... -->
-
-            <service
-              android:name="com.robinpowered.react.Intercom.IntercomIntentService"
-              android:exported="false">
-              <intent-filter
-                android:priority="999">
-                  <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-              </intent-filter>
-            </service>
-            <receiver
-              android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver"
-              tools:replace="android:exported"
-              android:exported="true" />
-          </application>
-        </manifest>
-        ```
-
     1. In `android/build.gradle` add `maven { url "https://maven.google.com" }` ([h/t](https://github.com/tinycreative/react-native-intercom/issues/153#issuecomment-348602868)):
 
         ```gradle
