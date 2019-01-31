@@ -43,21 +43,26 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void registerIdentifiedUser(ReadableMap options, Callback callback) {
-        if (options.hasKey("email") && options.getString("email").length() > 0) {
-            Intercom.client().registerIdentifiedUser(
-                    new Registration().withEmail(options.getString("email"))
-            );
-            Log.i(TAG, "registerIdentifiedUser with userEmail");
-            callback.invoke(null, null);
-        } else if (options.hasKey("userId") && options.getString("userId").length() > 0) {
-            Intercom.client().registerIdentifiedUser(
-                    new Registration().withUserId(options.getString("userId"))
-            );
-            Log.i(TAG, "registerIdentifiedUser with userId");
-            callback.invoke(null, null);
-        } else {
-            Log.e(TAG, "registerIdentifiedUser called with invalid userId or email");
-            callback.invoke("Invalid userId or email");
+        try {
+            if (options.hasKey("email") && options.getString("email").length() > 0) {
+                Intercom.client().registerIdentifiedUser(
+                        new Registration().withEmail(options.getString("email"))
+                );
+                Log.i(TAG, "registerIdentifiedUser with userEmail");
+                callback.invoke(null, null);
+            } else if (options.hasKey("userId") && options.getString("userId").length() > 0) {
+                Intercom.client().registerIdentifiedUser(
+                        new Registration().withUserId(options.getString("userId"))
+                );
+                Log.i(TAG, "registerIdentifiedUser with userId");
+                callback.invoke(null, null);
+            } else {
+                Log.e(TAG, "registerIdentifiedUser called with invalid userId or email");
+                callback.invoke("Invalid userId or email");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
         }
     }
 
@@ -74,17 +79,27 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void registerUnidentifiedUser(Callback callback) {
-        Intercom.client().registerUnidentifiedUser();
-        Log.i(TAG, "registerUnidentifiedUser");
-        callback.invoke(null, null);
+        try {
+            Intercom.client().registerUnidentifiedUser();
+            Log.i(TAG, "registerUnidentifiedUser");
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
     public void logout(@Nullable Callback callback) {
-        Intercom.client().logout();
-        Log.i(TAG, "logout");
-        if (callback != null) {
-            callback.invoke(null, null);
+        try {
+            Intercom.client().logout();
+            Log.i(TAG, "logout");
+            if (callback != null) {
+                callback.invoke(null, null);
+            }
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
         }
     }
 
@@ -121,44 +136,79 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void handlePushMessage(Callback callback) {
-        Intercom.client().handlePushMessage();
-        callback.invoke(null, null);
+        try {
+            Intercom.client().handlePushMessage();
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        } 
     }
 
     @ReactMethod
     public void displayMessenger(Callback callback) {
-        Intercom.client().displayMessenger();
-        callback.invoke(null, null);
+        try {
+            Intercom.client().displayMessenger();
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
     public void hideMessenger(Callback callback) {
-        Intercom.client().hideMessenger();
-        callback.invoke(null, null);
+        try {
+            Intercom.client().hideMessenger();
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
     public void displayMessageComposer(Callback callback) {
-        Intercom.client().displayMessageComposer();
-        callback.invoke(null, null);
+        try {
+            Intercom.client().displayMessageComposer();
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
     public void displayMessageComposerWithInitialMessage(String message, Callback callback) {
-        Intercom.client().displayMessageComposer(message);
-        callback.invoke(null, null);
+        try {
+            Intercom.client().displayMessageComposer(message);
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
     public void setUserHash(String userHash, Callback callback) {
-        Intercom.client().setUserHash(userHash);
-        callback.invoke(null, null);
+        try {
+            Intercom.client().setUserHash(userHash);
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
     public void displayConversationsList(Callback callback) {
-        Intercom.client().displayConversationsList();
-        callback.invoke(null, null);
+        try {
+            Intercom.client().displayConversationsList();
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     @ReactMethod
@@ -176,8 +226,13 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void displayHelpCenter(Callback callback) {
-        Intercom.client().displayHelpCenter();
-        callback.invoke(null, null);
+        try {
+            Intercom.client().displayHelpCenter();
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     private Intercom.Visibility visibilityStringToVisibility(String visibility) {
@@ -216,9 +271,14 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     
     @ReactMethod
     public void setBottomPadding( Integer padding, Callback callback) {
-         Intercom.client().setBottomPadding(padding);
-         Log.i(TAG, "setBottomPadding");
-         callback.invoke(null, null);
+        try {
+            Intercom.client().setBottomPadding(padding);
+            Log.i(TAG, "setBottomPadding");
+            callback.invoke(null, null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            callback.invoke(e.getMessage());
+        }
     }
 
     private UserAttributes convertToUserAttributes(ReadableMap readableMap) {
