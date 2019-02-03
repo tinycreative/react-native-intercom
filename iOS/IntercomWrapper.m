@@ -14,6 +14,13 @@
 
 RCT_EXPORT_MODULE();
 
+// Available as NativeModules.IntercomWrapper.initializeIntercom
+RCT_EXPORT_METHOD(initializeIntercom :(NSString*)apiKey :(NSString*)appId :(RCTResponseSenderBlock)callback) {
+    NSLog(@"initializeIntercom");
+    [Intercom setApiKey:apiKey forAppId:appId];
+    callback(@[[NSNull null]]);
+};
+
 // Available as NativeModules.IntercomWrapper.registerIdentifiedUser
 RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options callback:(RCTResponseSenderBlock)callback) {
     NSLog(@"registerIdentifiedUser with %@", options);

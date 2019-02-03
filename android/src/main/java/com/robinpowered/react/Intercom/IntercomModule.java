@@ -24,6 +24,7 @@ import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.UserAttributes;
 import io.intercom.android.sdk.identity.Registration;
 import io.intercom.android.sdk.push.IntercomPushClient;
+import io.intercom.android.sdk.identity.AppIdentity;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -39,6 +40,28 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return MODULE_NAME;
+    }
+
+    @ReactMethod
+    public void initializeIntercom(String apiKey, String appId, Callback callback) {
+        if (getCurrentActivity() != null) {
+            try {
+                Intercom.initialize(getCurrentActivity().getApplication(), apiKey, appId);
+
+                if (AppIdentity.loadFromDevice(getCurrentActivity().getApplication()).apiKey() != null) {
+                    if (!AppIdentity.loadFromDevice(getCurrentActivity().getApplication()).apiKey().equals(apiKey)) {
+                        // different credentials
+                        callback.invoke("Intercom's SDK doesn't support switching between workspaces once it's initialized");
+                        return;
+                    }
+                }
+                callback.invoke(null, null);
+            } catch (Exception e) {
+                callback.invoke(e.getMessage());
+            }
+        } else {
+            Log.e(TAG, "initIntercom; getCurrentActivity() is null");
+        }
     }
 
     @ReactMethod
