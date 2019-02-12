@@ -12,6 +12,13 @@ interface INotifications {
 declare const Notifications: INotifications;
 
 /**
+ * initializeIntercom
+ * @param {string} apiKey
+ * @param {string} appId
+ */
+export function initializeIntercom(apiKey?: string,  appId?: string): Promise<void>;
+
+/**
  * sendTokenToIntercom
  * @param token
  */
