@@ -14,13 +14,6 @@
 
 RCT_EXPORT_MODULE();
 
-// Available as NativeModules.IntercomWrapper.initializeIntercom
-RCT_EXPORT_METHOD(initializeIntercom:(NSString*)apiKey :(NSString*)appId resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    NSLog(@"initializeIntercom");
-    [Intercom setApiKey:apiKey forAppId:appId];
-    resolve(@"sucess");
-};
-
 // Available as NativeModules.IntercomWrapper.registerIdentifiedUser
 RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     NSLog(@"registerIdentifiedUser with %@", options);

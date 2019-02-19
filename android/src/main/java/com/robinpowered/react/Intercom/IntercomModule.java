@@ -43,28 +43,6 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initializeIntercom(String apiKey, String appId, Promise promise) {
-        if (getCurrentActivity() != null) {
-            try {
-                Intercom.initialize(getCurrentActivity().getApplication(), apiKey, appId);
-
-                if (AppIdentity.loadFromDevice(getCurrentActivity().getApplication()).apiKey() != null) {
-                    if (!AppIdentity.loadFromDevice(getCurrentActivity().getApplication()).apiKey().equals(apiKey)) {
-                        // different credentials
-                        promise.reject("Intercom's SDK doesn't support switching between workspaces once it's initialized");
-                        return;
-                    }
-                }
-                promise.resolve("success");
-            } catch (Exception e) {
-                promise.reject(e.toString());
-            }
-        } else {
-            Log.e(TAG, "initIntercom; getCurrentActivity() is null");
-        }
-    }
-
-    @ReactMethod
     public void registerIdentifiedUser(ReadableMap options, Promise promise) {
         try {
             if (options.hasKey("email") && options.getString("email").length() > 0) {
