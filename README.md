@@ -103,40 +103,6 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-    1. In `android/app/src/main/AndroidManifest.xml`, add the following code in the respective sections of the file:
-
-        ```xml
-        <?xml version="1.0" encoding="utf-8"?>
-        <manifest package="com.myapp"
-
-          ...other configuration here...
-
-        >
-          <application
-
-            ...other configuration here...
-
-            xmlns:tools="http://schemas.android.com/tools"
-          >
-
-            <!-- ...other configuration here... -->
-
-            <service
-              android:name="com.robinpowered.react.Intercom.IntercomIntentService"
-              android:exported="false">
-              <intent-filter
-                android:priority="999">
-                  <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-              </intent-filter>
-            </service>
-            <receiver
-              android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver"
-              tools:replace="android:exported"
-              android:exported="true" />
-          </application>
-        </manifest>
-        ```
-
     1. In `android/build.gradle` add `maven { url "https://maven.google.com" }` ([h/t](https://github.com/tinycreative/react-native-intercom/issues/153#issuecomment-348602868)):
 
         ```gradle
@@ -150,36 +116,90 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
         }
         ```
 
-    1. Decide which type of push messaging you want to install, and add choosen method to `android/app/build.gradle`. 
-    
-        If "Google Cloud Messaging (GCM)", then:
+    1. Decide which type of push messaging you want to install, and add choosen method to `android/app/build.gradle`.
 
-        ```gradle
-        dependencies {
+        1. If you'd rather not have push notifications in your app, you can use this dependency:
 
-          //...other configuration here...
+            ```gradle
+            dependencies {
+                implementation 'io.intercom.android:intercom-sdk-base:5.+'
+            }
+            ```
 
-          compile 'io.intercom.android:intercom-sdk:5.+'
-        }
-        ```
-        If "Firebase Cloud Messaging(FCM)", then:
+        1. If "Firebase Cloud Messaging(FCM)", then:
+            ```gradle
+            dependencies {
 
-        ```gradle
-        dependencies {
+              //...other configuration here...
 
-          //...other configuration here...
+              compile 'io.intercom.android:intercom-sdk-fcm:5.+'
+            }
+            ```
 
-          compile 'io.intercom.android:intercom-sdk-fcm:5.+'
-          compile 'com.google.firebase:firebase-messaging:11.+'
-        }
-        ```
-        If you'd rather not have push notifications in your app, you can use this dependency:
+            If you're already using FCM in your application you'll need to extend `FirebaseMessagingService` to handle Intercom's push notifications (refer to [Using Intercom with other FCM setups](https://developers.intercom.com/installing-intercom/docs/android-fcm-push-notifications#section-step-7-using-intercom-with-other-fcm-setups-optional))
 
-        ```gradle
-        dependencies {
-            implementation 'io.intercom.android:intercom-sdk-base:5.+'
-        }
-        ```
+            ### Here's an example if you're using [react-native-firebase](https://github.com/invertase/react-native-firebase) as your existing FCM setup:
+
+            I. Add a new file if you don't have one (`android/app/src/main/java/com/YOUR_APP/MainMessagingService.java`)
+
+            ```java
+            package com.YOUR_APP;
+            import io.invertase.firebase.messaging.*;
+            import android.content.Intent;
+            import android.content.Context;
+            import io.intercom.android.sdk.push.IntercomPushClient;
+            import io.invertase.firebase.messaging.RNFirebaseMessagingService;
+            import com.google.firebase.messaging.RemoteMessage;
+            import android.util.Log;
+            import java.util.Map;
+
+            public class MainMessagingService extends RNFirebaseMessagingService {
+                private static final String TAG = "MainMessagingService";
+                private final IntercomPushClient intercomPushClient = new IntercomPushClient();
+
+                @Override
+                public void onMessageReceived(RemoteMessage remoteMessage) {
+                    Map message = remoteMessage.getData();
+
+                    if (intercomPushClient.isIntercomPush(message)) {
+                        Log.d(TAG, "Intercom message received");
+                        intercomPushClient.handlePush(getApplication(), message);
+                    } else {
+                        super.onMessageReceived(remoteMessage);
+                    }
+                }
+            }
+            ```
+
+            II. Then add the following code to `android/app/src/main/AndroidManifest.xml`:
+            
+            ```xml
+            <?xml version="1.0" encoding="utf-8"?>
+            <manifest package="com.YOUR_APP"
+
+              ...other configuration here...
+
+            >
+              <application
+
+                ...other configuration here...
+
+                xmlns:tools="http://schemas.android.com/tools"
+              >
+
+                <!-- ...other configuration here... -->
+                <!-- ...ADD THE SERVICE BELOW... -->
+                <service
+                  android:name=".MainMessagingService"
+                  android:enabled="true"
+                  android:exported="true">
+                    <intent-filter>
+                      <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                    </intent-filter>
+                </service>
+              </application>
+            </manifest>
+            ```
 
 1. Import Intercom and use methods
 
