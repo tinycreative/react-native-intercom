@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.frameworks   = [ "Intercom" ]
   s.static_framework = true
-  s.dependency 'React/Core'
+  s.dependency 'React'
   s.dependency 'Intercom', '~> 5.0'
 end
