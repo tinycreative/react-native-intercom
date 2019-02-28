@@ -145,7 +145,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         } catch(Exception e) {
             Log.e(TAG, "Intercom not initialized");
             promise.reject(e.toString());
-        } 
+        }
     }
 
     @ReactMethod
@@ -271,7 +271,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             promise.reject(ex.toString());
         }
     }
-    
+
     @ReactMethod
     public void setBottomPadding( Integer padding, Promise promise) {
         try {
@@ -301,7 +301,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             } else if (key.equals("language_override")) {
                 builder.withLanguageOverride((String)value);
             } else if (key.equals("signed_up_at")) {
-                Date dateSignedUpAt = new Date(((Number)value).longValue());
+                Date dateSignedUpAt = new Date(((Number)value).longValue() * 1000);
                 builder.withSignedUpAt(dateSignedUpAt);
             } else if (key.equals("unsubscribed_from_emails")) {
                 builder.withUnsubscribedFromEmails((Boolean)value);
