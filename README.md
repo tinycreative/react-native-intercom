@@ -287,6 +287,16 @@ Intercom.displayMessageComposer();
 Intercom.displayMessageComposerWithInitialMessage('Initial Message');
 ```
 
+### Display Latest Conversation 
+```javascript
+Intercom.displayMessenger();
+```
+
+### Display Conversations List
+```javascript
+Intercom.displayConversationsList();
+```
+
 ### Set Bottom Padding
 ```javascript
 Intercom.setBottomPadding(64);
