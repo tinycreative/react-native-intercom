@@ -49,10 +49,10 @@ export function updateUser(attributes: {
 
 /**
  * registerIdentifiedUser
- * @param {userId: string} options
+ * @param {userId: string} | {email: string} options
  * @returns {Promise<void>}
  */
-export function registerIdentifiedUser(options: { userId: string }): Promise<void>;
+export function registerIdentifiedUser(options: { userId: string } | { email: string }): Promise<void>;
 
 /**
  * logout
