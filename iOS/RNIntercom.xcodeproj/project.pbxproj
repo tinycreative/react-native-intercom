@@ -223,7 +223,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"~/Documents/Intercom",
-					"$(SRCROOT)/../../../ios/**",
 					"$(SRCROOT)/../../../ios/Pods/**",
 					"$(SRCROOT)/../../../ios/Carthage/Build/**",
 				);
@@ -245,7 +244,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"~/Documents/Intercom",
-					"$(SRCROOT)/../../../ios/**",
 					"$(SRCROOT)/../../../ios/Pods/**",
 					"$(SRCROOT)/../../../ios/Carthage/Build/**",
 				);
