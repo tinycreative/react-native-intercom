@@ -16,7 +16,7 @@ RCT_EXPORT_MODULE();
 
 // Available as NativeModules.IntercomWrapper.registerIdentifiedUser
 RCT_EXPORT_METHOD(registerIdentifiedUser:(NSDictionary*)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    NSLog(@"registerIdentifiedUser with %@", options);
+    NSLog(@"registerIdentifiedUser");
 
     NSString* userId      = options[@"userId"];
     NSString* userEmail   = options[@"email"];
@@ -72,7 +72,7 @@ RCT_EXPORT_METHOD(logout :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBloc
 
 // Available as NativeModules.IntercomWrapper.updateUser
 RCT_EXPORT_METHOD(updateUser:(NSDictionary*)options resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-    NSLog(@"updateUser with %@", options);
+    NSLog(@"updateUser");
     NSDictionary* attributes = options;
     [Intercom updateUser:[IntercomUserAttributesBuilder userAttributesFromDictionary:attributes]];
     resolve([NSNull null]);
@@ -166,11 +166,11 @@ RCT_EXPORT_METHOD(getUnreadConversationCount :(RCTPromiseResolveBlock)resolve :(
 // Available as NativeModules.IntercomWrapper.displayHelpCenter
 RCT_EXPORT_METHOD(displayHelpCenter :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject) {
     NSLog(@"displayHelpCenter");
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [Intercom presentHelpCenter];
     });
-    
+
     resolve([NSNull null]);
 };
 
