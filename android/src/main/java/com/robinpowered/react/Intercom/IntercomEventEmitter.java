@@ -41,6 +41,11 @@ public class IntercomEventEmitter extends ReactContextBaseJavaModule {
     }
 
     @Override
+    public boolean canOverrideExistingModule() {        
+        return true;
+    }
+
+    @Override
     public Map<String, Object> getConstants() {
         final Map<String, Object> constants = new HashMap<>();
         constants.put("UNREAD_CHANGE_NOTIFICATION", UNREAD_CHANGE_NOTIFICATION);

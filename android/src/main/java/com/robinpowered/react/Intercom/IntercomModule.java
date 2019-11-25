@@ -42,6 +42,11 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         return MODULE_NAME;
     }
 
+    @Override
+    public boolean canOverrideExistingModule() {        
+        return true;
+    }
+
     @ReactMethod
     public void registerIdentifiedUser(ReadableMap options, Promise promise) {
         try {
