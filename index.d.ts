@@ -7,6 +7,7 @@ type VisibilityType = IVisibility[keyof IVisibility];
 
 interface INotifications {
   UNREAD_COUNT: 'UNREAD_CHANGE_NOTIFICATION';
+  WINDOW_DID_SHOW: 'WINDOW_DID_SHOW';
   WINDOW_DID_HIDE: 'WINDOW_DID_HIDE';
 }
 declare const Notifications: INotifications;
