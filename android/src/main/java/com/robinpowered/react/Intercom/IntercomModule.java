@@ -55,13 +55,13 @@ public class IntercomModule extends ReactContextBaseJavaModule {
                 promise.resolve(null);
             } else if (hasEmail) {
                 Intercom.client().registerIdentifiedUser(
-                        new Registration().withEmail(options.getString("email"))
+                    Registration.create().withEmail(options.getString("email"))
                 );
                 Log.i(TAG, "registerIdentifiedUser with userEmail");
                 promise.resolve(null);
             } else if (hasUserId) {
                 Intercom.client().registerIdentifiedUser(
-                        new Registration().withUserId(options.getString("userId"))
+                    Registration.create().withUserId(options.getString("userId"))
                 );
                 Log.i(TAG, "registerIdentifiedUser with userId");
                 promise.resolve(null);
