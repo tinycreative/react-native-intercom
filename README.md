@@ -307,6 +307,12 @@ Intercom.displayHelpCenter();
 Intercom.setBottomPadding(64);
 ```
 
+### Display Help Center
+```javascript
+Intercom.displayHelpCenter();
+```
+Note that before calling `Intercom.displayHelpCenter()` it is required to enable Help Center in your Intercom settings.
+
 ### Listen for Unread Conversation Notifications
 ```javascript
 componentDidMount() {
