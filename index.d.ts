@@ -64,9 +64,9 @@ export function logout(): Promise<void>;
 /**
  * Log an event
  * @param {string} eventName
- * @param {[key: string]: string} metadata
+ * @param {[key: string]: string | number | boolean } metadata
  */
-export function logEvent(eventName: string, metadata: { [key: string]: string }): Promise<void>;
+export function logEvent(eventName: string, metadata: { [key: string]: string | number | boolean }): Promise<void>;
 
 /**
  * handlePushMessage
