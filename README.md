@@ -297,11 +297,6 @@ Intercom.displayMessenger();
 Intercom.displayConversationsList();
 ```
 
-### Display Help Center
-```javascript
-Intercom.displayHelpCenter();
-```
-
 ### Set Bottom Padding
 ```javascript
 Intercom.setBottomPadding(64);
