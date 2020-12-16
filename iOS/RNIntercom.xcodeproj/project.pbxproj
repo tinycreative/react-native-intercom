@@ -224,6 +224,8 @@
 					"$(inherited)",
 					"~/Documents/Intercom",
 					"$(SRCROOT)/../../../ios/**",
+					"$(SRCROOT)/../../../ios/Pods/**",
+					"$(SRCROOT)/../../../ios/Carthage/Build/**",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -244,6 +246,8 @@
 					"$(inherited)",
 					"~/Documents/Intercom",
 					"$(SRCROOT)/../../../ios/**",
+					"$(SRCROOT)/../../../ios/Pods/**",
+					"$(SRCROOT)/../../../ios/Carthage/Build/**",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

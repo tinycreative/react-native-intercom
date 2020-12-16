@@ -1,5 +1,16 @@
-export type Visibility = 'GONE' | 'VISIBLE';
-export type Notifications = 'UNREAD_CHANGE_NOTIFICATION';
+interface IVisibility {
+  GONE: 'GONE';
+  VISIBLE: 'VISIBLE';
+}
+declare const Visibility: IVisibility;
+type VisibilityType = IVisibility[keyof IVisibility];
+
+interface INotifications {
+  UNREAD_COUNT: 'UNREAD_CHANGE_NOTIFICATION';
+  WINDOW_DID_SHOW: 'WINDOW_DID_SHOW';
+  WINDOW_DID_HIDE: 'WINDOW_DID_HIDE';
+}
+declare const Notifications: INotifications;
 
 /**
  * sendTokenToIntercom
@@ -39,23 +50,23 @@ export function updateUser(attributes: {
 
 /**
  * registerIdentifiedUser
- * @param {userId: string} options
+ * @param {userId: string} | {email: string} options
  * @returns {Promise<void>}
  */
-export function registerIdentifiedUser(options: { userId: string }): Promise<void>;
+export function registerIdentifiedUser(options: { userId: string } | { email: string }): Promise<void>;
 
 /**
- * reset
+ * logout
  * @returns {Promise<void>}
  */
-export function reset(): Promise<void>;
+export function logout(): Promise<void>;
 
 /**
  * Log an event
  * @param {string} eventName
- * @param {[key: string]: string} metadata
+ * @param {[key: string]: string | number | boolean } metadata
  */
-export function logEvent(eventName: string, metadata: { [key: string]: string }): Promise<void>;
+export function logEvent(eventName: string, metadata: { [key: string]: string | number | boolean }): Promise<void>;
 
 /**
  * handlePushMessage
@@ -97,7 +108,7 @@ export function displayConversationsList(): Promise<void>;
  * getUnreadConversationCount
  * @returns {Promise<void>}
  */
-export function getUnreadConversationCount(): Promise<void>;
+export function getUnreadConversationCount(): Promise<number>;
 
 /**
  * displayHelpCenter
@@ -110,14 +121,14 @@ export function displayHelpCenter(): Promise<void>;
  * @param {string} visibility
  * @returns {Promise<void>}
  */
-export function setLauncherVisibility(visibility: Visibility): Promise<void>;
+export function setLauncherVisibility(visibility: VisibilityType): Promise<void>;
 
 /**
  * setLauncherVisibility
  * @param {string} visibility
  * @returns {Promise<void>}
  */
-export function setInAppMessageVisibility(visibility: Visibility): Promise<void>;
+export function setInAppMessageVisibility(visibility: VisibilityType): Promise<void>;
 
 /**
  * setupAPN
@@ -145,14 +156,14 @@ export function setBottomPadding(padding: number): Promise<void>;
  * @param {string} type
  * @param {() => void} handler
  */
-export function addEventListener(type: string, handler: () => void): void;
+export function addEventListener(type: string, handler: (event?: any) => void): void;
 
 /**
  * removeEventListener
  * @param {string} type
  * @param {() => void} handler
  */
-export function removeEventListener(type: string, handler: () => void): void;
+export function removeEventListener(type: string, handler: (event?: any) => void): void;
 
 /**
  * To enable iOS push notifications, simply call the following anywhere in your code:

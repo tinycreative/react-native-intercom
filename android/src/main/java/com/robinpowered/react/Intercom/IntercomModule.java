@@ -2,7 +2,7 @@ package com.robinpowered.react.Intercom;
 
 import android.util.Log;
 
-import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -19,10 +19,12 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import io.intercom.android.sdk.Company;
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.UserAttributes;
 import io.intercom.android.sdk.identity.Registration;
 import io.intercom.android.sdk.push.IntercomPushClient;
+import io.intercom.android.sdk.identity.AppIdentity;
 
 public class IntercomModule extends ReactContextBaseJavaModule {
 
@@ -40,68 +42,98 @@ public class IntercomModule extends ReactContextBaseJavaModule {
         return MODULE_NAME;
     }
 
+    @Override
+    public boolean canOverrideExistingModule() {        
+        return true;
+    }
+
     @ReactMethod
-    public void registerIdentifiedUser(ReadableMap options, Callback callback) {
-        if (options.hasKey("email") && options.getString("email").length() > 0) {
-            Intercom.client().registerIdentifiedUser(
-                    new Registration().withEmail(options.getString("email"))
-            );
-            Log.i(TAG, "registerIdentifiedUser with userEmail");
-            callback.invoke(null, null);
-        } else if (options.hasKey("userId") && options.getString("userId").length() > 0) {
-            Intercom.client().registerIdentifiedUser(
-                    new Registration().withUserId(options.getString("userId"))
-            );
-            Log.i(TAG, "registerIdentifiedUser with userId");
-            callback.invoke(null, null);
-        } else {
-            Log.e(TAG, "registerIdentifiedUser called with invalid userId or email");
-            callback.invoke("Invalid userId or email");
+    public void registerIdentifiedUser(ReadableMap options, Promise promise) {
+        try {
+            Boolean hasEmail = options.hasKey("email") && options.getString("email").length() > 0;
+            Boolean hasUserId = options.hasKey("userId") && options.getString("userId").length() > 0;
+            if (hasEmail && hasUserId) {
+                Intercom.client().registerIdentifiedUser(
+                        new Registration().withEmail(options.getString("email")).withUserId(options.getString("userId"))
+                );
+                Log.i(TAG, "registerIdentifiedUser with userEmail");
+                promise.resolve(null);
+            } else if (hasEmail) {
+                Intercom.client().registerIdentifiedUser(
+                    Registration.create().withEmail(options.getString("email"))
+                );
+                Log.i(TAG, "registerIdentifiedUser with userEmail");
+                promise.resolve(null);
+            } else if (hasUserId) {
+                Intercom.client().registerIdentifiedUser(
+                    Registration.create().withUserId(options.getString("userId"))
+                );
+                Log.i(TAG, "registerIdentifiedUser with userId");
+                promise.resolve(null);
+            } else {
+                Log.e(TAG, "registerIdentifiedUser called with invalid userId or email");
+                promise.reject("Invalid userId or email");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
         }
     }
 
     @ReactMethod
-    public void sendTokenToIntercom(String token, Callback callback) {
-        if (getCurrentActivity() != null) {
-            intercomPushClient.sendTokenToIntercom(getCurrentActivity().getApplication(), token);
-            Log.i(TAG, "sendTokenToIntercom");
-            callback.invoke(null, null);
-        } else {
-            Log.e(TAG, "sendTokenToIntercom; getCurrentActivity() is null");
+    public void sendTokenToIntercom(String token, Promise promise) {
+        try {
+            if (getCurrentActivity() != null) {
+                intercomPushClient.sendTokenToIntercom(getCurrentActivity().getApplication(), token);
+                Log.i(TAG, "sendTokenToIntercom");
+                promise.resolve(null);
+            } else {
+                Log.e(TAG, "sendTokenToIntercom; getCurrentActivity() is null");
+            }
+        } catch(Exception e) {
+            promise.reject(e.toString());
         }
     }
 
     @ReactMethod
-    public void registerUnidentifiedUser(Callback callback) {
-        Intercom.client().registerUnidentifiedUser();
-        Log.i(TAG, "registerUnidentifiedUser");
-        callback.invoke(null, null);
-    }
-
-    @ReactMethod
-    public void reset(@Nullable Callback callback) {
-        Intercom.client().reset();
-        Log.i(TAG, "reset");
-        if (callback != null) {
-            callback.invoke(null, null);
+    public void registerUnidentifiedUser(Promise promise) {
+        try {
+            Intercom.client().registerUnidentifiedUser();
+            Log.i(TAG, "registerUnidentifiedUser");
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
         }
     }
 
     @ReactMethod
-    public void updateUser(ReadableMap options, Callback callback) {
+    public void logout(Promise promise) {
+        try {
+            Intercom.client().logout();
+            Log.i(TAG, "logout");
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
+    }
+
+    @ReactMethod
+    public void updateUser(ReadableMap options, Promise promise) {
         try {
             UserAttributes userAttributes = convertToUserAttributes(options);
             Intercom.client().updateUser(userAttributes);
             Log.i(TAG, "updateUser");
-            callback.invoke(null, null);
+            promise.resolve(null);
         } catch (Exception e) {
             Log.e(TAG, "updateUser - unable to deconstruct argument map");
-            callback.invoke(e.toString());
+            promise.reject(e.toString());
         }
     }
 
     @ReactMethod
-    public void logEvent(String eventName, @Nullable ReadableMap metaData, Callback callback) {
+    public void logEvent(String eventName, @Nullable ReadableMap metaData, Promise promise) {
         try {
             if (metaData == null) {
                 Intercom.client().logEvent(eventName);
@@ -111,72 +143,112 @@ public class IntercomModule extends ReactContextBaseJavaModule {
                 Intercom.client().logEvent(eventName, deconstructedMap);
             }
             Log.i(TAG, "logEvent");
-            callback.invoke(null, null);
+            promise.resolve(null);
         } catch (Exception e) {
             Log.e(TAG, "logEvent - unable to deconstruct metaData");
-            callback.invoke(e.toString());
+            promise.reject(e.toString());
         }
     }
 
     @ReactMethod
-    public void handlePushMessage(Callback callback) {
-        Intercom.client().handlePushMessage();
-        callback.invoke(null, null);
+    public void handlePushMessage(Promise promise) {
+        try {
+            Intercom.client().handlePushMessage();
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void displayMessenger(Callback callback) {
-        Intercom.client().displayMessenger();
-        callback.invoke(null, null);
+    public void displayMessenger(Promise promise) {
+        try {
+            Intercom.client().displayMessenger();
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void hideMessenger(Callback callback) {
-        Intercom.client().hideMessenger();
-        callback.invoke(null, null);
+    public void hideMessenger(Promise promise) {
+        try {
+            Intercom.client().hideMessenger();
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void displayMessageComposer(Callback callback) {
-        Intercom.client().displayMessageComposer();
-        callback.invoke(null, null);
+    public void displayMessageComposer(Promise promise) {
+        try {
+            Intercom.client().displayMessageComposer();
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void displayMessageComposerWithInitialMessage(String message, Callback callback) {
-        Intercom.client().displayMessageComposer(message);
-        callback.invoke(null, null);
+    public void displayMessageComposerWithInitialMessage(String message, Promise promise) {
+        try {
+            Intercom.client().displayMessageComposer(message);
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void setUserHash(String userHash, Callback callback) {
-        Intercom.client().setUserHash(userHash);
-        callback.invoke(null, null);
+    public void setUserHash(String userHash, Promise promise) {
+        try {
+            Intercom.client().setUserHash(userHash);
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void displayConversationsList(Callback callback) {
-        Intercom.client().displayConversationsList();
-        callback.invoke(null, null);
+    public void displayConversationsList(Promise promise) {
+        try {
+            Intercom.client().displayConversationsList();
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     @ReactMethod
-    public void getUnreadConversationCount(Callback callback) {
+    public void getUnreadConversationCount(Promise promise) {
 
         try {
             int conversationCount = Intercom.client().getUnreadConversationCount();
 
-            callback.invoke(null, conversationCount);
+            promise.resolve(conversationCount);
         } catch (Exception ex) {
             Log.e(TAG, "logEvent - unable to get conversation count");
-            callback.invoke(ex.toString());
+            promise.reject(ex.toString());
         }
     }
 
     @ReactMethod
-    public void displayHelpCenter(Callback callback) {
-        Intercom.client().displayHelpCenter();
-        callback.invoke(null, null);
+    public void displayHelpCenter(Promise promise) {
+        try {
+            Intercom.client().displayHelpCenter();
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     private Intercom.Visibility visibilityStringToVisibility(String visibility) {
@@ -188,36 +260,41 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setLauncherVisibility(String visibility, Callback callback) {
+    public void setLauncherVisibility(String visibility, Promise promise) {
         Intercom.Visibility intercomVisibility = visibilityStringToVisibility(visibility);
 
         try {
             Intercom.client().setLauncherVisibility(intercomVisibility);
 
-            callback.invoke(null, null);
+            promise.resolve(null);
         } catch (Exception ex) {
-            callback.invoke(ex.toString());
+            promise.reject(ex.toString());
         }
     }
 
     @ReactMethod
-    public void setInAppMessageVisibility(String visibility, Callback callback) {
+    public void setInAppMessageVisibility(String visibility, Promise promise) {
         Intercom.Visibility intercomVisibility = visibilityStringToVisibility(visibility);
 
         try {
             Intercom.client().setInAppMessageVisibility(intercomVisibility);
 
-            callback.invoke(null, null);
+            promise.resolve(null);
         } catch (Exception ex) {
-            callback.invoke(ex.toString());
+            promise.reject(ex.toString());
         }
     }
-    
+
     @ReactMethod
-    public void setBottomPadding( Integer padding, Callback callback) {
-         Intercom.client().setBottomPadding(padding);
-         Log.i(TAG, "setBottomPadding");
-         callback.invoke(null, null);
+    public void setBottomPadding( Integer padding, Promise promise) {
+        try {
+            Intercom.client().setBottomPadding(padding);
+            Log.i(TAG, "setBottomPadding");
+            promise.resolve(null);
+        } catch(Exception e) {
+            Log.e(TAG, "Intercom not initialized");
+            promise.reject(e.toString());
+        }
     }
 
     private UserAttributes convertToUserAttributes(ReadableMap readableMap) {
@@ -237,7 +314,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             } else if (key.equals("language_override")) {
                 builder.withLanguageOverride((String)value);
             } else if (key.equals("signed_up_at")) {
-                Date dateSignedUpAt = new Date(((Number)value).longValue());
+                Date dateSignedUpAt = new Date(((Number)value).longValue() * 1000);
                 builder.withSignedUpAt(dateSignedUpAt);
             } else if (key.equals("unsubscribed_from_emails")) {
                 builder.withUnsubscribedFromEmails((Boolean)value);
@@ -245,8 +322,18 @@ public class IntercomModule extends ReactContextBaseJavaModule {
                 // value should be a Map here
                 builder.withCustomAttributes((Map)value);
             } else if (key.equals("companies")) {
-                Log.w(TAG, "Not implemented yet");
-                // Note that this parameter is companies for iOS and company for Android
+                ArrayList<Map<String, Object>> companyaArray =  (ArrayList<Map<String, Object>>)value;
+                for (Map<String, Object> companyObject: companyaArray) {
+                    if (companyObject.containsKey("company_id")) {
+                        Company.Builder companyBuilder = new Company.Builder();
+                        companyBuilder.withCompanyId(companyObject.get("company_id").toString());
+                        if (companyObject.containsKey("name")) {
+                            companyBuilder.withName(companyObject.get("name").toString());
+                        }
+                        Company company = companyBuilder.build();
+                        builder.withCompany(company);
+                    }
+                }
             }
         }
         return builder.build();

@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.summary      = package['description']
   s.source       = { :git => package['repository']['url'] }
   s.source_files = 'iOS/*.{h,m}'
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '10.0'
   s.frameworks   = [ "Intercom" ]
   s.static_framework = true
-  s.dependency 'React/Core'
-  s.dependency 'Intercom', '~> 4.1.9'
+  s.dependency 'React'
+  s.dependency 'Intercom', '~> 8.0.0'
 end
