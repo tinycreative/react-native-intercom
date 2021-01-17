@@ -122,7 +122,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
             ```gradle
             dependencies {
-                implementation 'io.intercom.android:intercom-sdk-base:5.+'
+                implementation 'io.intercom.android:intercom-sdk-base:7.+'
             }
             ```
 
@@ -132,7 +132,7 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
               //...other configuration here...
 
-              compile 'io.intercom.android:intercom-sdk-fcm:5.+'
+              compile 'io.intercom.android:intercom-sdk-fcm:7.+'
             }
             ```
 
