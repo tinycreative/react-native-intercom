@@ -94,6 +94,17 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             promise.reject(e.toString());
         }
     }
+  
+    @ReactMethod
+    public void presentCarousel(String carouselID, Promise promise) {
+        try {
+            Intercom.client().displayCarousel(carouselID);
+            Log.i(TAG, "presentCarousel");
+            promise.resolve(null);
+        } catch(Exception e) {
+            promise.reject(e.toString());
+        }
+    }
 
     @ReactMethod
     public void registerUnidentifiedUser(Promise promise) {
