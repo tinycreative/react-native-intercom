@@ -1,34 +1,34 @@
 {
-    "name": "react-native-intercom",
-    "version": "18.0.0",
-    "description": "A React Native client for Intercom.io",
-    "main": "./lib/IntercomClient.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "react-native-intercom",
+  "version": "17.0.0",
+  "description": "A React Native client for Intercom.io",
+  "main": "./lib/IntercomClient.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinycreative/react-native-intercom.git"
+  },
+  "author": "Asa Miller",
+  "contributors": [
+    {
+      "name": "Asa Miller",
+      "email": "asa@tinycreative.com"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/tinycreative/react-native-intercom.git"
+    {
+      "name": "Franklyn Tackitt",
+      "email": "frank@comanage.com"
     },
-    "author": "Asa Miller",
-    "contributors": [
-        {
-            "name": "Asa Miller",
-            "email": "asa@tinycreative.com"
-        },
-        {
-            "name": "Franklyn Tackitt",
-            "email": "frank@comanage.com"
-        },
-        {
-            "name": "Jason Brown",
-            "email": "browniefed@gmail.com"
-        }
-    ],
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/tinycreative/react-native-intercom/issues"
-    },
-    "homepage": "https://github.com/tinycreative/react-native-intercom",
-    "dependencies": {}
+    {
+      "name": "Jason Brown",
+      "email": "browniefed@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tinycreative/react-native-intercom/issues"
+  },
+  "homepage": "https://github.com/tinycreative/react-native-intercom",
+  "dependencies": {}
 }
