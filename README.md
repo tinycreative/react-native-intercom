@@ -313,6 +313,12 @@ Intercom.displayHelpCenter();
 ```
 Note that before calling `Intercom.displayHelpCenter()` it is required to enable Help Center in your Intercom settings.
 
+### Present a Carousel
+```javascript
+Intercom.presentCarousel(carouselID);
+```
+Note that before calling `Intercom.presentCarousel(carouselID)` it is required to enable carousels and create a carousel in your Intercom settings.
+
 ### Listen for Unread Conversation Notifications
 ```javascript
 componentDidMount() {
