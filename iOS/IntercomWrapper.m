@@ -61,6 +61,13 @@ RCT_EXPORT_METHOD(registerUnidentifiedUser :(RCTPromiseResolveBlock)resolve :(RC
     resolve([NSNull null]);
 };
 
+// Available as NativeModules.IntercomWrapper.registerUnidentifiedUser
+RCT_EXPORT_METHOD(presentCarousel:(NSString*)carouselID resolver: (RCTPromiseResolveBlock)resolve rejector:(RCTPromiseRejectBlock)reject) {
+    NSLog(@"registerUnidentifiedUser");
+    [Intercom presentCarousel:carouselID];
+    resolve([NSNull null]);
+};
+
 // Available as NativeModules.IntercomWrapper.logout
 RCT_EXPORT_METHOD(logout :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject) {
     NSLog(@"logout");

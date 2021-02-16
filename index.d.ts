@@ -19,6 +19,12 @@ declare const Notifications: INotifications;
 export function sendTokenToIntercom(token: any): Promise<void>;
 
 /**
+ * presentCarousel
+ * @param token
+ */
+export function presentCarousel(carouselID: String): Promise<void>;
+
+/**
  * registerUnidentifiedUser
  * @returns {Promise<void>}
  */
