@@ -107,9 +107,9 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void displayArticle(String articleID, Promise promise) {
+    public void presentArticle(String articleID, Promise promise) {
         try {
-            Intercom.client().displayCarousel(articleID);
+            Intercom.client().displayArticle(articleID);
             Log.i(TAG, "displayArticle");
             promise.resolve(null);
         } catch(Exception e) {
