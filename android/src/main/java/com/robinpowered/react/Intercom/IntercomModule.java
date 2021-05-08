@@ -107,6 +107,17 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void presentArticle(String articleID, Promise promise) {
+        try {
+            Intercom.client().displayArticle(articleID);
+            Log.i(TAG, "displayArticle");
+            promise.resolve(null);
+        } catch(Exception e) {
+            promise.reject(e.toString());
+        }
+    }
+
+    @ReactMethod
     public void registerUnidentifiedUser(Promise promise) {
         try {
             Intercom.client().registerUnidentifiedUser();
