@@ -90,15 +90,11 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
           }
 
           public List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-
               // ...other configuration here...
 
-              new IntercomPackage()
+              packages.add(new IntercomPackage());
 
               // ...other configuration here...
-
-            );
           }
         }
         ```
@@ -132,7 +128,8 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
 
               //...other configuration here...
 
-              compile 'io.intercom.android:intercom-sdk-fcm:5.+'
+              implementation 'io.intercom.android:intercom-sdk-base:9.+'
+              implementation 'io.intercom.android:intercom-sdk:9.+'
             }
             ```
 
@@ -148,12 +145,12 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
             import android.content.Intent;
             import android.content.Context;
             import io.intercom.android.sdk.push.IntercomPushClient;
-            import io.invertase.firebase.messaging.RNFirebaseMessagingService;
+            import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService;
             import com.google.firebase.messaging.RemoteMessage;
             import android.util.Log;
             import java.util.Map;
 
-            public class MainMessagingService extends RNFirebaseMessagingService {
+            public class MainMessagingService extends ReactNativeFirebaseMessagingService {
                 private static final String TAG = "MainMessagingService";
                 private final IntercomPushClient intercomPushClient = new IntercomPushClient();
 
@@ -200,6 +197,8 @@ React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://gi
               </application>
             </manifest>
             ```
+            
+            * make sure you have only one service intent with action com.google.firebase.MESSAGING_EVENT
 
 1. Import Intercom and use methods
 
