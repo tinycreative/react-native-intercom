@@ -120,10 +120,9 @@ RCT_EXPORT_METHOD(handlePushMessage :(RCTPromiseResolveBlock)resolve :(RCTPromis
 RCT_EXPORT_METHOD(displayMessenger :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject) {
     NSLog(@"displayMessenger");
     
-    UIViewController *controller = RCTPresentedViewController();
-    [RCTUtilsUIOverride setPresentedViewController:controller];
-
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *controller = RCTPresentedViewController();
+        [RCTUtilsUIOverride setPresentedViewController:controller];
         [Intercom presentMessenger];
     });
 
@@ -145,10 +144,9 @@ RCT_EXPORT_METHOD(hideMessenger :(RCTPromiseResolveBlock)resolve :(RCTPromiseRej
 RCT_EXPORT_METHOD(displayMessageComposer :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject) {
     NSLog(@"displayMessageComposer");
     
-    UIViewController *controller = RCTPresentedViewController();
-    [RCTUtilsUIOverride setPresentedViewController:controller];
-
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *controller = RCTPresentedViewController();
+        [RCTUtilsUIOverride setPresentedViewController:controller];
         [Intercom presentMessageComposer];
     });
 
@@ -158,10 +156,9 @@ RCT_EXPORT_METHOD(displayMessageComposer :(RCTPromiseResolveBlock)resolve :(RCTP
 RCT_EXPORT_METHOD(displayMessageComposerWithInitialMessage:(NSString*)message resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     NSLog(@"displayMessageComposerWithInitialMessage");
     
-    UIViewController *controller = RCTPresentedViewController();
-    [RCTUtilsUIOverride setPresentedViewController:controller];
-
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *controller = RCTPresentedViewController();
+        [RCTUtilsUIOverride setPresentedViewController:controller];
         [Intercom presentMessageComposerWithInitialMessage:message];
     });
 
@@ -172,10 +169,9 @@ RCT_EXPORT_METHOD(displayMessageComposerWithInitialMessage:(NSString*)message re
 RCT_EXPORT_METHOD(displayConversationsList :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject) {
     NSLog(@"displayConversationsList");
     
-    UIViewController *controller = RCTPresentedViewController();
-    [RCTUtilsUIOverride setPresentedViewController:controller];
-
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *controller = RCTPresentedViewController();
+        [RCTUtilsUIOverride setPresentedViewController:controller];
         [Intercom presentConversationList];
     });
 
@@ -195,10 +191,9 @@ RCT_EXPORT_METHOD(getUnreadConversationCount :(RCTPromiseResolveBlock)resolve :(
 RCT_EXPORT_METHOD(displayHelpCenter :(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject) {
     NSLog(@"displayHelpCenter");
     
-    UIViewController *controller = RCTPresentedViewController();
-    [RCTUtilsUIOverride setPresentedViewController:controller];
-
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *controller = RCTPresentedViewController();
+        [RCTUtilsUIOverride setPresentedViewController:controller];
         [Intercom presentHelpCenter];
     });
 
