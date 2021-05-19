@@ -5,7 +5,7 @@ export declare const Visibility: {
     VISIBLE: string;
     GONE: string;
 };
-declare class IntercomClient {
+export declare class IntercomClient {
     static Visibility: {
         VISIBLE: string;
         GONE: string;

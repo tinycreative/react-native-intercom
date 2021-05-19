@@ -11,7 +11,7 @@ export const Visibility = {
   GONE: "GONE",
 };
 
-class IntercomClient {
+export class IntercomClient {
   static Visibility = Visibility;
 
   Notifications = {
