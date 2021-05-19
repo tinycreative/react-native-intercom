@@ -4,7 +4,7 @@
   "description": "A React Native client for Intercom.io",
   "main": "./lib/IntercomClient.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc "
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,8 @@
     "url": "https://github.com/tinycreative/react-native-intercom/issues"
   },
   "homepage": "https://github.com/tinycreative/react-native-intercom",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }

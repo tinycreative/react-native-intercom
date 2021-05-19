@@ -1,106 +1,136 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Visibility = void 0;
-const react_native_1 = require("react-native");
-const { IntercomWrapper, IntercomEventEmitter } = react_native_1.NativeModules;
+import { NativeModules, NativeEventEmitter } from "react-native";
+
+const { IntercomWrapper, IntercomEventEmitter } = NativeModules;
+
 /**
  * @class IntercomClient
  */
-exports.Visibility = {
+
+export const Visibility = {
   VISIBLE: "VISIBLE",
   GONE: "GONE",
 };
+
 class IntercomClient {
+  static Visibility = Visibility;
+
+  Notifications = {
+    UNREAD_COUNT: IntercomEventEmitter.UNREAD_CHANGE_NOTIFICATION,
+    WINDOW_DID_HIDE: IntercomEventEmitter.WINDOW_DID_HIDE_NOTIFICATION,
+    WINDOW_DID_SHOW: IntercomEventEmitter.WINDOW_DID_SHOW_NOTIFICATION,
+  };
+
+  _eventEmitter: any;
+  _eventHandlers: Record<string, any>;
+
   constructor() {
-    this.Notifications = {
-      UNREAD_COUNT: IntercomEventEmitter.UNREAD_CHANGE_NOTIFICATION,
-      WINDOW_DID_HIDE: IntercomEventEmitter.WINDOW_DID_HIDE_NOTIFICATION,
-      WINDOW_DID_SHOW: IntercomEventEmitter.WINDOW_DID_SHOW_NOTIFICATION,
-    };
     this._eventHandlers = {
       [IntercomEventEmitter.UNREAD_CHANGE_NOTIFICATION]: new Map(),
       [IntercomEventEmitter.WINDOW_DID_HIDE_NOTIFICATION]: new Map(),
       [IntercomEventEmitter.WINDOW_DID_SHOW_NOTIFICATION]: new Map(),
     };
   }
-  registerIdentifiedUser(options) {
+
+  registerIdentifiedUser(options: any) {
     return IntercomWrapper.registerIdentifiedUser(options);
   }
-  sendTokenToIntercom(token) {
+
+  sendTokenToIntercom(token: any) {
     return IntercomWrapper.sendTokenToIntercom(token);
   }
-  updateUser(options) {
+
+  updateUser(options: any) {
     return IntercomWrapper.updateUser(options);
   }
+
   registerUnidentifiedUser() {
     return IntercomWrapper.registerUnidentifiedUser();
   }
+
   logout() {
     return IntercomWrapper.logout();
   }
-  logEvent(eventName, metaData) {
+
+  logEvent(eventName: any, metaData: any) {
     return IntercomWrapper.logEvent(eventName, metaData);
   }
+
   handlePushMessage() {
     return IntercomWrapper.handlePushMessage();
   }
+
   displayMessenger() {
     return IntercomWrapper.displayMessenger();
   }
+
   hideMessenger() {
     return IntercomWrapper.hideMessenger();
   }
+
   displayMessageComposer() {
     return IntercomWrapper.displayMessageComposer();
   }
-  displayMessageComposerWithInitialMessage(message) {
+
+  displayMessageComposerWithInitialMessage(message: any) {
     return IntercomWrapper.displayMessageComposerWithInitialMessage(message);
   }
+
   displayConversationsList() {
     return IntercomWrapper.displayConversationsList();
   }
+
   getUnreadConversationCount() {
     return IntercomWrapper.getUnreadConversationCount();
   }
+
   displayHelpCenter() {
     return IntercomWrapper.displayHelpCenter();
   }
-  setLauncherVisibility(visibility) {
+
+  setLauncherVisibility(visibility: any) {
     return IntercomWrapper.setLauncherVisibility(visibility);
   }
-  setInAppMessageVisibility(visibility) {
+
+  setInAppMessageVisibility(visibility: any) {
     return IntercomWrapper.setInAppMessageVisibility(visibility);
   }
-  setupAPN(deviceToken) {
+
+  setupAPN(deviceToken: any) {
     return IntercomWrapper.setupAPN(deviceToken);
   }
+
   registerForPush() {
     return IntercomWrapper.registerForPush();
   }
-  setUserHash(userHash) {
+
+  setUserHash(userHash: any) {
     return IntercomWrapper.setUserHash(userHash);
   }
-  setBottomPadding(padding) {
+
+  setBottomPadding(padding: any) {
     return IntercomWrapper.setBottomPadding(padding);
   }
-  presentCarousel(carousel) {
+
+  presentCarousel(carousel: any) {
     return IntercomWrapper.presentCarousel(carousel);
   }
-  presentArticle(articleId) {
+
+  presentArticle(articleId: any) {
     return IntercomWrapper.presentArticle(articleId);
   }
-  addEventListener(type, handler) {
+
+  addEventListener(type: any, handler: any) {
     if (!this._eventEmitter) {
-      this._eventEmitter = new react_native_1.NativeEventEmitter(
-        IntercomEventEmitter
-      );
+      this._eventEmitter = new NativeEventEmitter(IntercomEventEmitter);
     }
-    const listener = this._eventEmitter.addListener(type, (rtn) =>
+
+    const listener = this._eventEmitter.addListener(type, (rtn: any) =>
       handler(rtn)
     );
     this._eventHandlers[type].set(handler, listener);
   }
-  removeEventListener(type, handler) {
+
+  removeEventListener(type: any, handler: any) {
     if (!this._eventHandlers[type].has(handler)) {
       return;
     }
@@ -108,5 +138,5 @@ class IntercomClient {
     this._eventHandlers[type].delete(handler);
   }
 }
-IntercomClient.Visibility = exports.Visibility;
-exports.default = new IntercomClient();
+
+export default new IntercomClient();

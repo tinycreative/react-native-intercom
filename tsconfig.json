@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["es2015"],
+    "module": "commonjs",
+    "jsx": "react-native",
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "outDir": "./lib"
+  },
+  "include": ["./src/IntercomClient.ts"],
+  "exclude": ["node_modules"]
+}
