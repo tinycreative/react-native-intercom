@@ -4,7 +4,7 @@
   "description": "A React Native client for Intercom.io",
   "main": "./lib/IntercomClient.js",
   "scripts": {
-    "build": "tsc "
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
