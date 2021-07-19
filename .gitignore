@@ -35,3 +35,6 @@ local.properties
 *.iws
 *.ipr
 node_modules
+gradlew.bat
+gradlew
+gradle

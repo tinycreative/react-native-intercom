@@ -30,6 +30,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
 
     private static final String MODULE_NAME = "IntercomWrapper";
     public static final String TAG = "Intercom";
+    public static final String HIDE_INTERCOM = "206";
 
     private final IntercomPushClient intercomPushClient = new IntercomPushClient();
 
@@ -43,7 +44,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
 
     @Override
-    public boolean canOverrideExistingModule() {        
+    public boolean canOverrideExistingModule() {
         return true;
     }
 
@@ -94,7 +95,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             promise.reject(e.toString());
         }
     }
-  
+
     @ReactMethod
     public void presentCarousel(String carouselID, Promise promise) {
         try {
@@ -186,11 +187,13 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void hideMessenger(Promise promise) {
         try {
-            Intercom.client().hideMessenger();
-            promise.resolve(null);
-        } catch(Exception e) {
-            Log.e(TAG, "Intercom not initialized");
-            promise.reject(e.toString());
+            Intercom.client().hideIntercom();
+            Log.d(TAG, "hideIntercom");
+            promise.resolve(true);
+        } catch (Exception err) {
+            Log.e(TAG, "hideIntercom error:");
+            Log.e(TAG, err.toString());
+            promise.reject(HIDE_INTERCOM, err.toString());
         }
     }
 
