@@ -134,7 +134,7 @@ RCT_EXPORT_METHOD(hideMessenger :(RCTPromiseResolveBlock)resolve :(RCTPromiseRej
     NSLog(@"hideMessenger");
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Intercom hideMessenger];
+        [Intercom hideIntercom];
     });
 
     resolve([NSNull null]);
