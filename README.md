@@ -5,6 +5,20 @@ Intercom has released an official package for React Native. Please use it.
 [https://github.com/intercom/intercom-react-native](https://github.com/intercom/intercom-react-native)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # react-native-intercom [DEPRECATED]
 React Native wrapper for Intercom.io. Based off of [intercom-cordova](https://github.com/intercom/intercom-cordova)
 
